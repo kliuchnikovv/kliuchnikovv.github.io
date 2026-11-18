@@ -76,20 +76,21 @@ const { active } = Astro.props;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
     margin-left: 4px;
     padding: 0;
     color: var(--muted-foreground);
     background: transparent;
-    border: 1px solid var(--border);
+    border: none;
     border-radius: var(--radius-full);
     cursor: pointer;
-    transition: color 0.12s, border-color 0.12s;
+    /* Lift to the nav text line: the links carry 6px of bottom padding+border. */
+    transform: translateY(-3px);
+    transition: color 0.12s;
   }
   .theme-toggle:hover {
     color: var(--foreground);
-    border-color: var(--muted-foreground);
   }
   /* Show the icon for the theme you'd switch TO. */
   .theme-toggle .sun { display: none; }
