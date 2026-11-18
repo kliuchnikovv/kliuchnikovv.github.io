@@ -7,23 +7,29 @@ const { active } = Astro.props;
 ---
 
 <header class="site-header">
-  <a href="/" class="brand" aria-label="Home">
-    <span class="brand-mark">kv</span><span class="brand-dot">.</span>
-  </a>
-  <nav aria-label="Primary navigation">
-    <a href="/posts/" class:list={[{ active: active === 'posts' }]}>Posts</a>
-    <a href="/projects/" class:list={[{ active: active === 'projects' }]}>Projects</a>
-    <a href="/about/" class:list={[{ active: active === 'about' }]}>About</a>
-  </nav>
+  <div class="bar">
+    <a href="/" class="brand" aria-label="Home">
+      <span class="brand-mark">kv</span><span class="brand-dot">.</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="/posts/" class:list={[{ active: active === 'posts' }]}>Posts</a>
+      <a href="/projects/" class:list={[{ active: active === 'projects' }]}>Projects</a>
+      <a href="/about/" class:list={[{ active: active === 'about' }]}>About</a>
+    </nav>
+  </div>
 </header>
 
 <style>
   .site-header {
+    border-bottom: 1px solid var(--border);
+  }
+  .bar {
+    max-width: var(--content-page);
+    margin: 0 auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 28px 120px;
-    border-bottom: 1px solid var(--border);
+    padding: 28px var(--page-gutter);
   }
 
   .brand {
@@ -57,7 +63,7 @@ const { active } = Astro.props;
   }
 
   @media (max-width: 767px) {
-    .site-header { padding: 16px 20px; }
+    .bar { padding: 16px 20px; }
     nav { gap: 20px; font-size: 14px; }
     nav a { padding: 10px 0; }
   }

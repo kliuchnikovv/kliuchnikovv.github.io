@@ -55,7 +55,8 @@
 
   /* Контент-ширины */
   --content-prose: 68ch;   /* тело поста */
-  --content-page: 1040px;  /* desktop-контент внутри страницы */
+  --content-page: 1200px;  /* desktop-контент внутри страницы */
+  --page-gutter: 48px;     /* горизонтальные поля контента/шапки/футера */
 }
 
 [data-theme="dark"] {
