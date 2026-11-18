@@ -8,7 +8,7 @@ repo: https://github.com/kliuchnikovv/ARC
 tech: [Arduino, C++, Python, nRF24]
 tags: [arduino, embedded]
 featured: false
-order: 7
+order: 6
 ---
 
 A home-built radio-control system for a model airplane: a Steam Deck ground

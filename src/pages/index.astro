@@ -15,7 +15,7 @@ const posts = (await getCollection('posts'))
 
 const featured = (await getCollection('projects'))
   .filter((p) => p.data.featured)
-  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime() || a.data.order - b.data.order)
+  .sort((a, b) => a.data.order - b.data.order)
   .slice(0, 6);
 ---
 

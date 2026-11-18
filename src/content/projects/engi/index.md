@@ -8,7 +8,7 @@ repo: https://github.com/kliuchnikovv/engi
 tech: [Go, HTTP, OpenTelemetry]
 tags: [go]
 featured: true
-order: 3
+order: 4
 ---
 
 A lightweight Go web framework: declarative services where a handler declares

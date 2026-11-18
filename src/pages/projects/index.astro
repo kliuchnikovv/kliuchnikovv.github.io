@@ -10,7 +10,7 @@ const groups = PROJECT_STATUSES.map((status) => ({
   status,
   items: projects
     .filter((p) => p.data.status === status)
-    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime() || a.data.order - b.data.order),
+    .sort((a, b) => a.data.order - b.data.order),
 })).filter((g) => g.items.length > 0);
 ---
 

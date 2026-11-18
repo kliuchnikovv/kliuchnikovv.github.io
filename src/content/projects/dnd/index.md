@@ -8,7 +8,7 @@ repo: https://github.com/kliuchnikovv/dnd
 tech: [Go, React Native, LLM, WebSocket]
 tags: [go]
 featured: true
-order: 4
+order: 3
 ---
 
 A mobile detective RPG where a deterministic Go rules engine decides what is

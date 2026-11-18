@@ -8,7 +8,7 @@ repo: https://github.com/kliuchnikovv/parrot
 tech: [Go, SQLite, MCP]
 tags: [go, ai]
 featured: false
-order: 6
+order: 7
 ---
 
 A personal "chief of staff" agent: it gathers context from your work systems,
