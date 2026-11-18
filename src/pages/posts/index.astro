@@ -1,0 +1,91 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import TagList from '../../components/TagList.astro';
+import { getCollection } from 'astro:content';
+import { isPublished } from '../../utils/content';
+import { readingMinutes } from '../../utils/reading-time';
+
+const posts = (await getCollection('posts'))
+  .filter(isPublished)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime());
+
+const allTags = [...new Set(posts.flatMap((p) => p.data.tags))].sort();
+---
+
+<BaseLayout title="Posts" description="Writing on Go, distributed systems, and the things I build." canonicalPath="/posts/" active="posts">
+  <section class="posts page">
+    <h1>Posts</h1>
+
+    {allTags.length > 0 && (
+      <div class="filter-bar">
+        <a href="/posts/" class="tag reset" data-tag-reset>All</a>
+        <TagList tags={allTags} />
+      </div>
+    )}
+
+    {posts.length > 0 ? (
+      <div class="post-list" data-post-list>
+        {posts.map((post) => (
+          <div class="post-item" data-tags={post.data.tags.join(' ')}>
+            <PostCard
+              title={post.data.title}
+              url={`/posts/${post.id}/`}
+              date={post.data.pubDate}
+              readingMinutes={readingMinutes(post.body ?? '')}
+              tags={post.data.tags}
+              description={post.data.description}
+            />
+          </div>
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No posts yet.</p>
+    )}
+
+    <p class="empty-state" data-empty hidden>No posts match that tag.</p>
+  </section>
+</BaseLayout>
+
+<style>
+  .posts h1 { font-size: 36px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 20px; }
+  .filter-bar { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-bottom: 8px; }
+  .reset {
+    font-size: 13px;
+    color: var(--muted-foreground);
+    padding: 4px 10px;
+    min-height: 32px;
+    line-height: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+  }
+  .reset:hover { color: var(--foreground); border-color: var(--muted-foreground); text-decoration: none; }
+</style>
+
+<script>
+  // Client-side tag filter reading ?tag= from the URL.
+  const params = new URLSearchParams(window.location.search);
+  const active = params.get('tag');
+  const items = Array.from(document.querySelectorAll<HTMLElement>('.post-item'));
+  const empty = document.querySelector<HTMLElement>('[data-empty]');
+
+  if (active) {
+    let shown = 0;
+    for (const item of items) {
+      const tags = (item.dataset.tags ?? '').split(' ');
+      const match = tags.includes(active);
+      item.hidden = !match;
+      if (match) shown++;
+    }
+    if (empty) empty.hidden = shown !== 0;
+
+    // Mark the active tag chip.
+    document.querySelectorAll<HTMLAnchorElement>('.tag-list a').forEach((a) => {
+      if (a.getAttribute('href') === `/posts/?tag=${active}`) {
+        a.classList.add('is-active');
+        a.setAttribute('aria-current', 'page');
+      }
+    });
+  }
+</script>

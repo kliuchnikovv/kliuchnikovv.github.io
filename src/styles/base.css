@@ -132,3 +132,20 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .prose h2 { font-size: 24px; }
   .prose h3 { font-size: 20px; }
 }
+
+/* Page container — aligns body content with the header/footer gutters. */
+.page {
+  max-width: var(--content-page);
+  margin: 0 auto;
+  padding: 48px 120px;
+}
+@media (max-width: 767px) {
+  .page { padding: 32px 20px; }
+}
+
+/* Empty-state block for list routes with nothing to show. */
+.empty-state {
+  padding: 48px 0;
+  color: var(--muted-foreground);
+  font-size: 15px;
+}

@@ -1,0 +1,61 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { PROJECT_STATUSES } from '../../content/validators';
+
+const projects = await getCollection('projects');
+
+const groups = PROJECT_STATUSES.map((status) => ({
+  status,
+  items: projects
+    .filter((p) => p.data.status === status)
+    .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime() || a.data.order - b.data.order),
+})).filter((g) => g.items.length > 0);
+---
+
+<BaseLayout title="Projects" description="Things I build, grouped by status." canonicalPath="/projects/" active="projects">
+  <section class="projects page">
+    <h1>Projects</h1>
+
+    {groups.length > 0 ? (
+      groups.map((group) => (
+        <div class="group">
+          <h2 class="group-label">{group.status}</h2>
+          <div class="project-grid">
+            {group.items.map((p) => (
+              <ProjectCard
+                title={p.data.title}
+                url={`/projects/${p.id}/`}
+                tagline={p.data.tagline}
+                status={p.data.status}
+                tech={p.data.tech}
+                cover={p.data.cover}
+              />
+            ))}
+          </div>
+        </div>
+      ))
+    ) : (
+      <p class="empty-state">No projects yet.</p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .projects h1 { font-size: 36px; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 24px; }
+  .group { margin-bottom: 36px; }
+  .group-label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-foreground);
+    margin: 0 0 14px;
+  }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+</style>

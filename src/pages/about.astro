@@ -1,0 +1,135 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AvailabilityDot from '../components/AvailabilityDot.astro';
+
+const projects = [
+  { url: 'https://github.com/kliuchnikovv/engi', kicker: 'Go · web framework', name: 'engi',
+    text: 'A lightweight Go HTTP framework: declarative routing, automatic parameter validation, auth/CORS middleware and OpenTelemetry tracing, with graceful shutdown built in.' },
+  { url: 'https://github.com/kliuchnikovv/nomi', kicker: 'AI agents · full stack', name: 'nomi',
+    text: 'An AI-agent ecosystem: a Go API gateway, Python (Agno) agent orchestration and a React Native app, tied together with a plugin system and real-time WebSocket streaming.' },
+  { url: 'https://github.com/kliuchnikovv/keystone', kicker: 'Embedded · smart home', name: 'keystone',
+    text: 'A local-first smart-home hub that reimplements the core of Home Assistant on bare ESP32 (C++ / ESP-IDF), across several chips in one box, with a Go remote-access relay.' },
+  { url: 'https://github.com/kliuchnikovv/dnd', kicker: 'Mobile game · trust boundaries', name: 'dnd',
+    text: 'A mobile detective RPG where a deterministic Go rules engine decides what is true and language models only narrate. Reproducible from (seed, input); 1200+ tests, 10 ADRs.' },
+];
+---
+
+<BaseLayout
+  title={`About — Valerii Kliuchnikov`}
+  description="Senior backend engineer, Go. Distributed systems, event-driven backends and LLM infrastructure. Barcelona, remote-first."
+  canonicalPath="/about/"
+  active="about"
+>
+  <article class="about page">
+    <header class="hero">
+      <p class="eyebrow">Backend engineering · Go</p>
+      <h1>Valerii Kliuchnikov</h1>
+      <p class="role">Senior Software Engineer — distributed systems &amp; LLM infrastructure</p>
+      <p class="lede">
+        I build production backend systems in Go — nine years across fintech, AI tooling and social
+        platforms. I care about systems that stay up under load: event-driven architectures, message
+        pipelines with real failure handling, and keeping LLM infrastructure fast and affordable.
+      </p>
+      <p class="dot-row"><AvailabilityDot /></p>
+    </header>
+
+    <section>
+      <h2>What I'm doing</h2>
+      <p>
+        Senior Software Engineer at <a href="https://playneta.gg">Playneta</a>, working across a Go
+        microservices monorepo: LLM-powered chat translation, user-generated-content moderation, and a
+        shared Kafka dead-letter-queue layer that the rest of the services lean on for reliability.
+      </p>
+      <p class="muted">
+        Before that: enterprise RBAC and payment systems, MCP server integrations at
+        <a href="https://refact.ai">Refact.ai</a>, Hyperledger Fabric smart contracts, and GDPR / PCI DSS
+        tokenization services.
+      </p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="xp">
+        <div class="top"><span class="org">Playneta — Senior Software Engineer</span><span class="when">Current</span></div>
+        <p>Backend services in a Go microservices monorepo: real-time LLM chat translation, UGC moderation, and a shared Kafka / Redpanda DLQ layer for graceful degradation across services.</p>
+      </div>
+      <div class="xp">
+        <div class="top"><span class="org">Refact.ai — Backend / Integrations</span><span class="when">Prior</span></div>
+        <p>MCP server integrations connecting developer tooling to language-model backends.</p>
+      </div>
+      <div class="xp">
+        <div class="top"><span class="org">Fintech &amp; enterprise platforms</span><span class="when">Prior</span></div>
+        <p>Enterprise RBAC and payment systems, Hyperledger Fabric smart contracts, and GDPR / PCI DSS tokenization services — high-trust, regulated, high-throughput work.</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects</h2>
+      <div class="grid">
+        {projects.map((p) => (
+          <a class="card" href={p.url}>
+            <span class="kicker">{p.kicker}</span>
+            <h3>{p.name}</h3>
+            <p>{p.text}</p>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2>Tech</h2>
+      <dl class="tech">
+        <div><dt>Languages</dt><dd>Go (primary), Python, TypeScript, C++</dd></div>
+        <div><dt>Messaging &amp; data</dt><dd>Kafka / Redpanda, PostgreSQL, ScyllaDB / Cassandra, Redis, gRPC</dd></div>
+        <div><dt>Infra &amp; cloud</dt><dd>Kubernetes / Helm, GCP, Terraform, Docker</dd></div>
+        <div><dt>AI &amp; observability</dt><dd>OpenRouter / MCP, OAuth 2.0, Prometheus, Grafana, OpenTelemetry</dd></div>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Let's talk</h2>
+      <p class="muted">The fastest way to reach me is email.</p>
+      <p><a href="mailto:kliuchnikovv@icloud.com">kliuchnikovv@icloud.com</a></p>
+      <p class="colo">Barcelona · remote-first.</p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-bottom: 8px; }
+  .hero h1 { margin: 0; font-size: clamp(2.4rem, 6vw, 3.4rem); font-weight: 600; letter-spacing: -0.02em; }
+  .hero .role { margin: 10px 0 0; font-size: clamp(1.05rem, 3vw, 1.3rem); color: var(--muted-foreground); }
+  .lede { max-width: 60ch; margin: 20px 0 0; font-size: 1.05rem; }
+  .dot-row { margin: 22px 0 0; }
+
+  .about section {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+  }
+  .about h2 { font-size: 22px; font-weight: 600; margin: 0 0 16px; }
+  .about p { margin: 0 0 12px; max-width: 70ch; }
+  .muted { color: var(--muted-foreground); }
+
+  .xp { padding: 14px 0; border-top: 1px solid var(--border); }
+  .xp:first-of-type { border-top: 0; padding-top: 0; }
+  .xp .top { display: flex; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; align-items: baseline; }
+  .xp .org { font-weight: 600; }
+  .xp .when { color: var(--muted-foreground); font-size: 14px; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+  .card {
+    display: flex; flex-direction: column;
+    border: 1px solid var(--border); border-radius: var(--radius-lg);
+    background: var(--card); padding: 18px; color: inherit; text-decoration: none;
+    transition: border-color 0.12s;
+  }
+  .card:hover { border-color: var(--muted-foreground); text-decoration: none; }
+  .card .kicker { font-size: 12px; color: var(--muted-foreground); }
+  .card h3 { margin: 6px 0 8px; font-size: 18px; }
+  .card p { font-size: 14px; color: var(--muted-foreground); margin: 0; }
+
+  .tech { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 28px; margin: 0; }
+  .tech dt { font-size: 13px; color: var(--muted-foreground); margin-bottom: 4px; }
+  .tech dd { margin: 0; }
+  .colo { color: var(--muted-foreground); font-size: 14px; }
+</style>
