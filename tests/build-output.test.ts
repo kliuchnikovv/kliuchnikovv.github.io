@@ -47,4 +47,10 @@ describe('production build output', () => {
   it('does not generate a page for the draft post', () => {
     expect(() => read('posts/hello-world/index.html')).toThrow();
   });
+
+  it('serves the favicon referenced by every page', () => {
+    // Head.astro links /favicon.svg; the asset must exist, or every page 404s it.
+    const svg = read('favicon.svg');
+    expect(svg).toContain('<svg');
+  });
 });
