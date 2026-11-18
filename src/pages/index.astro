@@ -59,7 +59,7 @@ const featured = (await getCollection('projects'))
             tagline={p.data.tagline}
             status={p.data.status}
             tech={p.data.tech}
-            cover={p.data.cover}
+            cover={p.data.cover ?? `/covers/${p.id}.png`}
           />
         ))}
       </div>

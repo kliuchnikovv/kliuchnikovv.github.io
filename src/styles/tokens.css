@@ -7,13 +7,13 @@
  */
 
 :root {
-  /* Семантика */
-  --background: oklch(0.99 0 0);
-  --foreground: oklch(0.15 0 0);
-  --card: oklch(0.985 0 0);
-  --muted: oklch(0.96 0 0);
-  --muted-foreground: oklch(0.47 0 0);
-  --border: oklch(0.92 0 0);
+  /* Семантика — тёплый «папирусный» нейтраль (небольшая хрома на hue ~88). */
+  --background: oklch(0.985 0.012 88);
+  --foreground: oklch(0.17 0.006 70);
+  --card: oklch(0.975 0.014 88);
+  --muted: oklch(0.945 0.016 88);
+  --muted-foreground: oklch(0.47 0.008 75);
+  --border: oklch(0.89 0.018 88);
   --primary: oklch(0.68 0.14 75); /* Casanomi gold */
   --ring: oklch(0.68 0.14 75 / 0.5);
   --destructive: oklch(0.55 0.20 25);
@@ -59,12 +59,12 @@
 }
 
 [data-theme="dark"] {
-  --background: oklch(0.14 0 0);
-  --foreground: oklch(0.95 0 0);
-  --card: oklch(0.17 0 0);
-  --muted: oklch(0.20 0 0);
-  --muted-foreground: oklch(0.65 0 0);
-  --border: oklch(0.25 0 0);
+  --background: oklch(0.15 0.006 70);
+  --foreground: oklch(0.95 0.004 85);
+  --card: oklch(0.18 0.008 70);
+  --muted: oklch(0.21 0.01 70);
+  --muted-foreground: oklch(0.65 0.006 80);
+  --border: oklch(0.26 0.011 70);
   --primary: oklch(0.78 0.13 80); /* Casanomi gold (dark) */
   --ring: oklch(0.78 0.13 80 / 0.6);
   --destructive: oklch(0.65 0.20 25);

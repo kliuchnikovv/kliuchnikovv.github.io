@@ -11,6 +11,7 @@ interface Props {
 }
 const { project } = Astro.props;
 const { title, tagline, description, status, repo, tech, cover } = project.data;
+const coverSrc = cover ?? `/covers/${project.id}.png`;
 
 const related = (await getCollection('posts'))
   .filter(isPublished)
@@ -59,7 +60,8 @@ const related = (await getCollection('posts'))
       </section>
     )}
 
-    {cover && <img class="cover" src={cover} alt="" />}
+    <img class="cover" src={coverSrc} alt="" />
+    {/* 16:9 to match the generated cover's aspect and avoid layout shift. */}
   </article>
 </BaseLayout>
 

@@ -24,7 +24,9 @@ describe('AuthorBio', () => {
   it('renders the author identity from config with photo and link to /about', async () => {
     const html = await container.renderToString(AuthorBio);
     expect(html).toContain(author.name);
-    expect(html).toContain(`src="${author.avatar}"`);
+    // Avatar renders via astro:assets <Image>: an optimized <img> whose src
+    // points at the processed avatar asset (no longer the raw /avatar.jpg).
+    expect(html).toMatch(/<img[^>]+src="[^"]*avatar[^"]*"/);
     expect(html).toContain(`alt="${author.name}"`);
     expect(html).toContain(`href="${author.aboutHref}"`);
   });

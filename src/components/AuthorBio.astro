@@ -1,11 +1,13 @@
 ---
 // AuthorBio — identical block at the end of every post; author from config.
+import { Image } from 'astro:assets';
 import { author } from '../config';
+import avatarImg from '../assets/avatar.jpg';
 ---
 
 <aside class="author-bio">
   {author.avatar ? (
-    <img class="avatar" src={author.avatar} alt={author.name} width="48" height="48" loading="lazy" />
+    <Image class="avatar" src={avatarImg} alt={author.name} width={48} height={48} densities={[1, 2]} loading="lazy" />
   ) : (
     <div class="avatar monogram" aria-hidden="true">{author.initials}</div>
   )}

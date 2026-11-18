@@ -2,8 +2,10 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AvailabilityDot from '../components/AvailabilityDot.astro';
 import ProjectCard from '../components/ProjectCard.astro';
+import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import { author } from '../config';
+import avatarImg from '../assets/avatar.jpg';
 
 // Single source of truth: the projects collection. Newest first, order as tiebreak.
 const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
@@ -24,7 +26,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
           <p class="role">Senior Software Engineer — distributed systems &amp; LLM infrastructure</p>
         </div>
         {author.avatar && (
-          <img class="portrait" src={author.avatar} alt={author.name} width="132" height="132" />
+          <Image class="portrait" src={avatarImg} alt={author.name} width={132} height={132} densities={[1, 2]} />
         )}
       </div>
       <p class="lede">
@@ -78,7 +80,7 @@ const projects = (await getCollection('projects')).sort((a, b) => a.data.order -
             tagline={p.data.tagline}
             status={p.data.status}
             tech={p.data.tech}
-            cover={p.data.cover}
+            cover={p.data.cover ?? `/covers/${p.id}.png`}
           />
         ))}
       </div>
