@@ -1,0 +1,43 @@
+---
+import '@fontsource-variable/geist';
+import '@fontsource-variable/geist-mono';
+import '../styles/tokens.css';
+import '../styles/base.css';
+import Head from '../components/Head.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogType?: 'article' | 'website';
+  ogImage?: string;
+  canonicalPath: string;
+  active?: 'posts' | 'projects' | 'about';
+}
+
+const { active, ...head } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <Head {...head} />
+    <script is:inline>
+      // No-flash theme: Phase 0 follows the system; Phase 2 adds a toggle.
+      try {
+        const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      } catch (e) {
+        /* no-op */
+      }
+    </script>
+  </head>
+  <body>
+    <Header active={active} />
+    <main class="page">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

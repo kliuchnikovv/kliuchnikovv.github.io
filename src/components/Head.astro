@@ -1,0 +1,47 @@
+---
+import { site } from '../config';
+
+interface Props {
+  title: string;
+  description?: string;
+  ogType?: 'article' | 'website';
+  ogImage?: string;
+  canonicalPath: string;
+}
+
+const {
+  title,
+  description = site.description,
+  ogType = 'website',
+  ogImage,
+  canonicalPath,
+} = Astro.props;
+
+const canonical = new URL(canonicalPath, site.url).href;
+const ogImageUrl = new URL(ogImage ?? site.defaultOgImage, site.url).href;
+const rssUrl = new URL('/rss.xml', site.url).href;
+
+const structuredData =
+  ogType === 'article'
+    ? { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: title, description }
+    : { '@context': 'https://schema.org', '@type': 'CreativeWork', name: title, description };
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>{title}</title>
+<meta name="description" content={description} />
+<link rel="canonical" href={canonical} />
+
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:type" content={ogType} />
+<meta property="og:url" content={canonical} />
+<meta property="og:image" content={ogImageUrl} />
+
+<meta name="twitter:card" content="summary_large_image" />
+
+<link rel="alternate" type="application/rss+xml" title={site.title} href={rssUrl} />
+<link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+
+<script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
