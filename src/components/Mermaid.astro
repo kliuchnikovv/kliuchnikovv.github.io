@@ -1,0 +1,64 @@
+---
+/**
+ * Client-side mermaid rendering, theme-aware.
+ *
+ * The mermaid source arrives as <pre class="mermaid" data-mermaid-source>…</pre>
+ * (see src/plugins/remark-mermaid.mjs). This script is bundled by Vite, so the
+ * early return keeps its body trivial on pages without a diagram, and mermaid
+ * itself is dynamically imported — its chunk is fetched only when a diagram is
+ * on the page. Re-renders on theme toggle using the light/dark variable presets.
+ */
+---
+
+<script>
+  import { mermaidLight, mermaidDark } from '../mermaid-preset';
+
+  const presets = { light: mermaidLight, dark: mermaidDark };
+  const nodes = Array.from(
+    document.querySelectorAll<HTMLElement>('[data-mermaid-source]'),
+  );
+
+  if (nodes.length > 0) {
+    // Keep the untouched source so re-renders after a theme switch start clean.
+    const sources = nodes.map((el) => el.textContent ?? '');
+    let mermaid: typeof import('mermaid').default | undefined;
+
+    const currentTheme = (): 'light' | 'dark' =>
+      document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light';
+
+    const render = async () => {
+      if (!mermaid) {
+        mermaid = (await import('mermaid')).default;
+      }
+      mermaid.initialize({
+        startOnLoad: false,
+        securityLevel: 'strict',
+        ...presets[currentTheme()],
+      });
+      nodes.forEach((el, i) => {
+        el.removeAttribute('data-processed');
+        el.innerHTML = sources[i];
+      });
+      try {
+        await mermaid.run({ nodes });
+      } catch (err) {
+        console.error('[mermaid] render failed', err);
+      }
+    };
+
+    render();
+
+    // Re-render when the theme attribute flips (the header toggle sets it).
+    let last = currentTheme();
+    new MutationObserver(() => {
+      const now = currentTheme();
+      if (now !== last) {
+        last = now;
+        render();
+      }
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+  }
+</script>

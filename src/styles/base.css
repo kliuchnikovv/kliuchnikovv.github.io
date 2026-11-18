@@ -28,6 +28,37 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   border-radius: 4px;
 }
 
+/* Skip link — hidden until focused by keyboard, then pinned to the top-left. */
+.skip-link {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 100;
+  padding: 8px 14px;
+  background: var(--background);
+  color: var(--foreground);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm, 6px);
+  font-size: 14px;
+  font-weight: 500;
+  transform: translateY(-150%);
+  transition: transform 0.15s ease;
+}
+.skip-link:focus { transform: translateY(0); text-decoration: none; }
+
+/* Mermaid — center the rendered SVG; pre is replaced in place on the client. */
+.mermaid {
+  margin: 1.5em 0;
+  text-align: center;
+  line-height: normal;
+}
+.mermaid[data-mermaid-source]:not([data-processed]) {
+  /* Pre-render: hide the raw source text, keep layout from jumping. */
+  color: transparent;
+  min-height: 2em;
+}
+.mermaid svg { max-width: 100%; height: auto; }
+
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;

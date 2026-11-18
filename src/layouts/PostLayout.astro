@@ -28,7 +28,7 @@ const tocHeadings = headings
   title={title}
   description={description}
   ogType="article"
-  ogImage={ogImage}
+  ogImage={ogImage ?? `/og/${post.id}.png`}
   canonicalPath={`/posts/${post.id}/`}
   active="posts"
 >

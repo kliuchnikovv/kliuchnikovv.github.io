@@ -34,7 +34,7 @@ export const OGDefault = () => ({
       position: 'relative',
       display: 'flex',
       flexDirection: 'column',
-      fontFamily: 'Geist',
+      fontFamily: 'Geist, GeistCyr',
       padding: '72px 80px',
       justifyContent: 'space-between',
     },
@@ -149,7 +149,27 @@ export const OGDefault = () => ({
           style: { display: 'flex', alignItems: 'center', justifyContent: 'space-between' },
           children: [
             { type: 'div', props: { style: { fontSize: '16px', color: '#787878' }, children: 'Barcelona · 8 лет Go' } },
-            { type: 'div', props: { style: { fontSize: '15px', color: '#787878', fontFamily: 'Geist Mono' }, children: '→ /posts' } },
+            {
+              type: 'div',
+              props: {
+                style: { display: 'flex', alignItems: 'center', gap: '8px', fontSize: '15px', color: '#787878', fontFamily: 'GeistMono, GeistMonoCyr, GeistMonoSym' },
+                children: [
+                  // Geist has no → glyph, so draw it (satori renders inline SVG).
+                  {
+                    type: 'svg',
+                    props: {
+                      width: 17, height: 17, viewBox: '0 0 24 24', fill: 'none',
+                      stroke: '#787878', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round',
+                      children: [
+                        { type: 'line', props: { x1: 5, y1: 12, x2: 19, y2: 12 } },
+                        { type: 'polyline', props: { points: '12 5 19 12 12 19' } },
+                      ],
+                    },
+                  },
+                  { type: 'span', props: { children: '/posts' } },
+                ],
+              },
+            },
           ],
         },
       },

@@ -31,7 +31,7 @@ export const OGPost = (data: PostData) => {
         position: 'relative',
         display: 'flex',
         flexDirection: 'column',
-        fontFamily: 'Geist',
+        fontFamily: 'Geist, GeistCyr',
       },
       children: [
         // 8-px gold bar left
@@ -176,7 +176,7 @@ export const OGPost = (data: PostData) => {
                     {
                       type: 'div',
                       props: {
-                        style: { fontSize: '14px', color: '#787878', fontFamily: 'Geist Mono' },
+                        style: { fontSize: '14px', color: '#787878', fontFamily: 'GeistMono, GeistMonoCyr, GeistMonoSym' },
                         children: `kliuchnikovv.github.io/posts/${data.slug}/`,
                       },
                     },

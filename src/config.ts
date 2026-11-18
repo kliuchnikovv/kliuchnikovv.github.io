@@ -34,6 +34,5 @@ export const socialLinks: SocialLink[] = [
   { label: 'GitHub', href: 'https://github.com/kliuchnikovv' },
   { label: 'LinkedIn', href: 'https://linkedin.com/in/kliuchnikovv' },
   { label: 'Telegram', href: 'https://t.me/kliuchnikovv' },
-  { label: 'Email', href: 'mailto:kliuchnikovv@icloud.com' },
   { label: 'Email', href: 'mailto:valeriy.v.klyuchnikov@gmail.com' },
 ];

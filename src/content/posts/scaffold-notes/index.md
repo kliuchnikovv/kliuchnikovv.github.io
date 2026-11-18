@@ -21,6 +21,20 @@ func main() {
 }
 ```
 
+## Rendering pipeline
+
+Diagrams render client-side from the `mermaid` fence, themed to match the page:
+
+```mermaid
+flowchart LR
+    MD[Markdown] --> R[remark-mermaid]
+    R --> P[pre.mermaid]
+    P --> C[mermaid.run in browser]
+    C --> SVG[Themed SVG]
+    class SVG accent
+    classDef accent fill:#FBF4E6,stroke:#C98A1F,color:#6B4E12
+```
+
 ## What's next
 
 Real writing, a Keystone deep-dive, and the Phase 2 design pass.
