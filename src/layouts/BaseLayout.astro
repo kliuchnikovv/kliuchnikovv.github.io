@@ -24,12 +24,14 @@ const { active, ...head } = Astro.props;
   <head>
     <Head {...head} />
     <script is:inline>
-      // No-flash theme: Phase 0 follows the system; Phase 2 adds a toggle.
+      // No-flash theme: a saved choice wins, otherwise follow the system.
       try {
-        const dark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const stored = localStorage.getItem('theme');
+        const dark = stored ? stored === 'dark'
+          : window.matchMedia('(prefers-color-scheme: dark)').matches;
         document.documentElement.dataset.theme = dark ? 'dark' : 'light';
       } catch (e) {
-        /* no-op */
+        document.documentElement.dataset.theme = 'light';
       }
     </script>
   </head>

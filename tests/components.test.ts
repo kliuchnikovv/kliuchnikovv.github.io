@@ -1,6 +1,7 @@
 import { experimental_AstroContainer as AstroContainer } from 'astro/container';
 import { describe, it, expect, beforeAll } from 'vitest';
 import Footer from '../src/components/Footer.astro';
+import Header from '../src/components/Header.astro';
 import TagList from '../src/components/TagList.astro';
 import PostCard from '../src/components/PostCard.astro';
 import { socialLinks } from '../src/config';
@@ -8,6 +9,14 @@ import { socialLinks } from '../src/config';
 let container: AstroContainer;
 beforeAll(async () => {
   container = await AstroContainer.create();
+});
+
+describe('Header', () => {
+  it('renders a theme toggle control', async () => {
+    const html = await container.renderToString(Header);
+    expect(html).toContain('data-theme-toggle');
+    expect(html).toMatch(/aria-label="[^"]*[Tt]heme[^"]*"/);
+  });
 });
 
 describe('Footer', () => {
