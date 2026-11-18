@@ -4,7 +4,11 @@ import { author } from '../config';
 ---
 
 <aside class="author-bio">
-  <div class="avatar" aria-hidden="true">{author.initials}</div>
+  {author.avatar ? (
+    <img class="avatar" src={author.avatar} alt={author.name} width="48" height="48" loading="lazy" />
+  ) : (
+    <div class="avatar monogram" aria-hidden="true">{author.initials}</div>
+  )}
   <div class="body">
     <p class="name">{author.name}</p>
     <p class="desc">
@@ -27,6 +31,12 @@ import { author } from '../config';
     width: 48px;
     height: 48px;
     border-radius: 50%;
+    flex-shrink: 0;
+  }
+  img.avatar {
+    object-fit: cover;
+  }
+  .monogram {
     background: var(--gold-soft);
     color: oklch(0.42 0.14 60);
     display: flex;
@@ -34,9 +44,8 @@ import { author } from '../config';
     justify-content: center;
     font-weight: 600;
     font-size: 18px;
-    flex-shrink: 0;
   }
-  [data-theme="dark"] .avatar { color: var(--gold); }
+  [data-theme="dark"] .monogram { color: var(--gold); }
 
   .body { flex: 1; min-width: 0; }
   .name { margin: 0 0 2px; font-size: 15px; font-weight: 600; }

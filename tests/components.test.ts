@@ -21,10 +21,11 @@ describe('Header', () => {
 });
 
 describe('AuthorBio', () => {
-  it('renders the author identity from config with a link to /about', async () => {
+  it('renders the author identity from config with photo and link to /about', async () => {
     const html = await container.renderToString(AuthorBio);
     expect(html).toContain(author.name);
-    expect(html).toContain(author.initials);
+    expect(html).toContain(`src="${author.avatar}"`);
+    expect(html).toContain(`alt="${author.name}"`);
     expect(html).toContain(`href="${author.aboutHref}"`);
   });
 });

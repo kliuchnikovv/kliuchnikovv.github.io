@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AvailabilityDot from '../components/AvailabilityDot.astro';
+import { author } from '../config';
 
 const projects = [
   { url: 'https://github.com/kliuchnikovv/engi', kicker: 'Go · web framework', name: 'engi',
@@ -22,9 +23,16 @@ const projects = [
 >
   <article class="about page">
     <header class="hero">
-      <p class="eyebrow">Backend engineering · Go</p>
-      <h1>Valerii Kliuchnikov</h1>
-      <p class="role">Senior Software Engineer — distributed systems &amp; LLM infrastructure</p>
+      <div class="hero-main">
+        <div class="hero-text">
+          <p class="eyebrow">Backend engineering · Go</p>
+          <h1>Valerii Kliuchnikov</h1>
+          <p class="role">Senior Software Engineer — distributed systems &amp; LLM infrastructure</p>
+        </div>
+        {author.avatar && (
+          <img class="portrait" src={author.avatar} alt={author.name} width="132" height="132" />
+        )}
+      </div>
       <p class="lede">
         I build production backend systems in Go — nine years across fintech, AI tooling and social
         platforms. I care about systems that stay up under load: event-driven architectures, message
@@ -97,6 +105,21 @@ const projects = [
 
 <style>
   .hero { padding-bottom: 8px; }
+  .hero-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  .hero-text { min-width: 0; }
+  .portrait {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
   .hero h1 { margin: 0; font-size: clamp(2.4rem, 6vw, 3.4rem); font-weight: 600; letter-spacing: -0.02em; }
   .hero .role { margin: 10px 0 0; font-size: clamp(1.05rem, 3vw, 1.3rem); color: var(--muted-foreground); }
   .lede { max-width: 60ch; margin: 20px 0 0; font-size: 1.05rem; }
@@ -132,4 +155,13 @@ const projects = [
   .tech dt { font-size: 13px; color: var(--muted-foreground); margin-bottom: 4px; }
   .tech dd { margin: 0; }
   .colo { color: var(--muted-foreground); font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .hero-main {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+    .portrait { width: 72px; height: 72px; }
+  }
 </style>

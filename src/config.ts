@@ -19,6 +19,8 @@ export const author = {
   initials: 'VK',
   role: 'Senior Software Engineer',
   bio: 'Go and systems engineer in Barcelona. I write about distributed backends, event-driven systems, and the things I build.',
+  /** Square portrait in /public; the monogram is the fallback when empty. */
+  avatar: '/avatar.jpg',
   aboutHref: '/about/',
 } as const;
 
