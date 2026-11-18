@@ -1,10 +1,9 @@
 /*
- * Design tokens.
+ * Design tokens — Phase 2 (Casanomi target palette).
  *
- * Phase 0: --primary / --gold / --ring / --gold-soft are neutralised to grey
- * (chroma 0). Token *structure* is final — Phase 2 restores the target accent
- * values (see docs) by editing only these few lines. Everything else here is
- * already the Phase 2 target.
+ * The accent pair (--primary / --ring / --gold / --gold-soft) carries the
+ * Casanomi gold in OKLCH. These were neutralised to grey in Phase 0; the
+ * swap back to the gold is these few lines only.
  */
 
 :root {
@@ -15,13 +14,13 @@
   --muted: oklch(0.96 0 0);
   --muted-foreground: oklch(0.47 0 0);
   --border: oklch(0.92 0 0);
-  --primary: oklch(0.47 0 0); /* Phase 0 neutral (target: oklch(0.68 0.14 75)) */
-  --ring: oklch(0.47 0 0 / 0.5); /* Phase 0 neutral (target: oklch(0.68 0.14 75 / 0.5)) */
+  --primary: oklch(0.68 0.14 75); /* Casanomi gold */
+  --ring: oklch(0.68 0.14 75 / 0.5);
   --destructive: oklch(0.55 0.20 25);
 
   /* Акцент-пара */
-  --gold: oklch(0.47 0 0); /* Phase 0 neutral (target: oklch(0.68 0.14 75)) */
-  --gold-soft: oklch(0.90 0 0); /* Phase 0 neutral (target: oklch(0.88 0.08 85)) */
+  --gold: oklch(0.68 0.14 75);
+  --gold-soft: oklch(0.88 0.08 85);
 
   /* Фон code-блока (мягкий оттенок, согласован с темой Shiki) */
   --code-bg: oklch(0.985 0.005 85);
@@ -66,12 +65,12 @@
   --muted: oklch(0.20 0 0);
   --muted-foreground: oklch(0.65 0 0);
   --border: oklch(0.25 0 0);
-  --primary: oklch(0.70 0 0); /* Phase 0 neutral (target: oklch(0.78 0.13 80)) */
-  --ring: oklch(0.70 0 0 / 0.6); /* Phase 0 neutral (target: oklch(0.78 0.13 80 / 0.6)) */
+  --primary: oklch(0.78 0.13 80); /* Casanomi gold (dark) */
+  --ring: oklch(0.78 0.13 80 / 0.6);
   --destructive: oklch(0.65 0.20 25);
 
-  --gold: oklch(0.70 0 0); /* Phase 0 neutral (target: oklch(0.78 0.13 80)) */
-  --gold-soft: oklch(0.35 0 0); /* Phase 0 neutral (target: oklch(0.42 0.08 75)) */
+  --gold: oklch(0.78 0.13 80);
+  --gold-soft: oklch(0.42 0.08 75);
 
   --code-bg: oklch(0.17 0.005 85);
   --code-header-bg: oklch(0.19 0.005 85);

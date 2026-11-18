@@ -9,20 +9,25 @@ function rootBlock(src: string): string {
   return m[1];
 }
 
-describe('Phase 0 tokens', () => {
+describe('Phase 2 target palette', () => {
   const root = rootBlock(css);
   const grey = /^oklch\(\s*[\d.]+\s+0\s+0\s*\)$/;
 
-  it('neutralises --primary to a chroma-0 grey', () => {
+  it('restores the gold accent on --primary (non-neutral)', () => {
     const m = root.match(/--primary:\s*([^;]+);/);
     expect(m).not.toBeNull();
-    expect(m![1].trim()).toMatch(grey);
+    const value = m![1].trim();
+    expect(value).not.toMatch(grey);
+    // gold = oklch(L 0.14 75): non-zero chroma, warm hue.
+    expect(value).toMatch(/^oklch\(\s*[\d.]+\s+0\.1[0-9]\s+7[0-9]\s*\)$/);
   });
 
-  it('neutralises --gold to a chroma-0 grey', () => {
+  it('restores the gold accent on --gold (non-neutral)', () => {
     const m = root.match(/--gold:\s*([^;]+);/);
     expect(m).not.toBeNull();
-    expect(m![1].trim()).toMatch(grey);
+    const value = m![1].trim();
+    expect(value).not.toMatch(grey);
+    expect(value).toMatch(/^oklch\(\s*[\d.]+\s+0\.1[0-9]\s+[78][0-9]\s*\)$/);
   });
 
   it('keeps the token structure intact', () => {
