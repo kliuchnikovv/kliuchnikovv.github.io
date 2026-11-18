@@ -1,15 +1,16 @@
 ---
-// AuthorBio — identical block at the end of every post.
+// AuthorBio — identical block at the end of every post; author from config.
+import { author } from '../config';
 ---
 
 <aside class="author-bio">
-  <div class="avatar" aria-hidden="true">VK</div>
+  <div class="avatar" aria-hidden="true">{author.initials}</div>
   <div class="body">
-    <div class="name">Valerii Kliuchnikov</div>
-    <div class="desc">
-      Go / systems engineer in Barcelona. I write about infrastructure and the things I build.
-      <a href="/about/">More →</a>
-    </div>
+    <p class="name">{author.name}</p>
+    <p class="desc">
+      {author.bio}
+      <a href={author.aboutHref}>More about me →</a>
+    </p>
   </div>
 </aside>
 
@@ -38,10 +39,7 @@
   [data-theme="dark"] .avatar { color: var(--gold); }
 
   .body { flex: 1; min-width: 0; }
-  .name { font-size: 15px; font-weight: 600; margin-bottom: 2px; }
-  .desc { font-size: 14px; line-height: 1.5; color: var(--muted-foreground); }
-
-  @media (max-width: 767px) {
-    .avatar { width: 44px; height: 44px; font-size: 16px; }
-  }
+  .name { margin: 0 0 2px; font-size: 15px; font-weight: 600; }
+  .desc { margin: 0; font-size: 14px; line-height: 1.5; color: var(--muted-foreground); }
+  .desc a { color: var(--primary); white-space: nowrap; }
 </style>

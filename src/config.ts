@@ -13,6 +13,15 @@ export const availability = {
   label: 'Open to offers · Barcelona',
 } as const;
 
+/** Author identity — single source for the bio shown at the end of every post. */
+export const author = {
+  name: 'Valerii Kliuchnikov',
+  initials: 'VK',
+  role: 'Senior Software Engineer',
+  bio: 'Go and systems engineer in Barcelona. I write about distributed backends, event-driven systems, and the things I build.',
+  aboutHref: '/about/',
+} as const;
+
 export interface SocialLink {
   label: string;
   href: string;

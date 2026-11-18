@@ -4,7 +4,8 @@ import Footer from '../src/components/Footer.astro';
 import Header from '../src/components/Header.astro';
 import TagList from '../src/components/TagList.astro';
 import PostCard from '../src/components/PostCard.astro';
-import { socialLinks } from '../src/config';
+import AuthorBio from '../src/components/AuthorBio.astro';
+import { socialLinks, author } from '../src/config';
 
 let container: AstroContainer;
 beforeAll(async () => {
@@ -16,6 +17,15 @@ describe('Header', () => {
     const html = await container.renderToString(Header);
     expect(html).toContain('data-theme-toggle');
     expect(html).toMatch(/aria-label="[^"]*[Tt]heme[^"]*"/);
+  });
+});
+
+describe('AuthorBio', () => {
+  it('renders the author identity from config with a link to /about', async () => {
+    const html = await container.renderToString(AuthorBio);
+    expect(html).toContain(author.name);
+    expect(html).toContain(author.initials);
+    expect(html).toContain(`href="${author.aboutHref}"`);
   });
 });
 
