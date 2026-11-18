@@ -44,6 +44,19 @@ describe('production build output', () => {
     expect(html).toContain('Playneta');
   });
 
+  it('lists every project from the collection on /projects', () => {
+    const html = read('projects/index.html');
+    for (const name of ['engi', 'nomi', 'keystone', 'dnd']) {
+      expect(html, `project ${name} listed`).toContain(`>${name}<`);
+    }
+  });
+
+  it('sources /about projects from the collection (links to project pages)', () => {
+    const html = read('about/index.html');
+    expect(html).toContain('href="/projects/engi/"');
+    expect(html).toContain('href="/projects/dnd/"');
+  });
+
   it('does not generate a page for the draft post', () => {
     expect(() => read('posts/hello-world/index.html')).toThrow();
   });

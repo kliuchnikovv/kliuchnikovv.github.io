@@ -1,18 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import AvailabilityDot from '../components/AvailabilityDot.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
 import { author } from '../config';
 
-const projects = [
-  { url: 'https://github.com/kliuchnikovv/engi', kicker: 'Go · web framework', name: 'engi',
-    text: 'A lightweight Go HTTP framework: declarative routing, automatic parameter validation, auth/CORS middleware and OpenTelemetry tracing, with graceful shutdown built in.' },
-  { url: 'https://github.com/kliuchnikovv/nomi', kicker: 'AI agents · full stack', name: 'nomi',
-    text: 'An AI-agent ecosystem: a Go API gateway, Python (Agno) agent orchestration and a React Native app, tied together with a plugin system and real-time WebSocket streaming.' },
-  { url: 'https://github.com/kliuchnikovv/keystone', kicker: 'Embedded · smart home', name: 'keystone',
-    text: 'A local-first smart-home hub that reimplements the core of Home Assistant on bare ESP32 (C++ / ESP-IDF), across several chips in one box, with a Go remote-access relay.' },
-  { url: 'https://github.com/kliuchnikovv/dnd', kicker: 'Mobile game · trust boundaries', name: 'dnd',
-    text: 'A mobile detective RPG where a deterministic Go rules engine decides what is true and language models only narrate. Reproducible from (seed, input); 1200+ tests, 10 ADRs.' },
-];
+// Single source of truth: the projects collection. Newest first, order as tiebreak.
+const projects = (await getCollection('projects')).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime() || a.data.order - b.data.order,
+);
 ---
 
 <BaseLayout
@@ -72,14 +68,20 @@ const projects = [
     </section>
 
     <section>
-      <h2>Projects</h2>
-      <div class="grid">
+      <div class="sec-head">
+        <h2>Projects</h2>
+        <a href="/projects/">All projects →</a>
+      </div>
+      <div class="project-grid">
         {projects.map((p) => (
-          <a class="card" href={p.url}>
-            <span class="kicker">{p.kicker}</span>
-            <h3>{p.name}</h3>
-            <p>{p.text}</p>
-          </a>
+          <ProjectCard
+            title={p.data.title}
+            url={`/projects/${p.id}/`}
+            tagline={p.data.tagline}
+            status={p.data.status}
+            tech={p.data.tech}
+            cover={p.data.cover}
+          />
         ))}
       </div>
     </section>
@@ -139,17 +141,20 @@ const projects = [
   .xp .org { font-weight: 600; }
   .xp .when { color: var(--muted-foreground); font-size: 14px; }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-  .card {
-    display: flex; flex-direction: column;
-    border: 1px solid var(--border); border-radius: var(--radius-lg);
-    background: var(--card); padding: 18px; color: inherit; text-decoration: none;
-    transition: border-color 0.12s;
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
   }
-  .card:hover { border-color: var(--muted-foreground); text-decoration: none; }
-  .card .kicker { font-size: 12px; color: var(--muted-foreground); }
-  .card h3 { margin: 6px 0 8px; font-size: 18px; }
-  .card p { font-size: 14px; color: var(--muted-foreground); margin: 0; }
+  .sec-head h2 { margin: 0; }
+  .sec-head a { font-size: 14px; }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
 
   .tech { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 28px; margin: 0; }
   .tech dt { font-size: 13px; color: var(--muted-foreground); margin-bottom: 4px; }
