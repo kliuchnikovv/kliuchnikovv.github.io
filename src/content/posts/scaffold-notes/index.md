@@ -13,6 +13,14 @@ wired up, and this is the first published post.
 
 Posts, projects, and an about page, all static and deployed from `main`.
 
+```go
+func main() {
+	// A tiny sample to check syntax highlighting.
+	msg := "hello, blog"
+	fmt.Println(msg)
+}
+```
+
 ## What's next
 
 Real writing, a Keystone deep-dive, and the Phase 2 design pass.

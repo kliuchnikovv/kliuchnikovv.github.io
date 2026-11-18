@@ -14,6 +14,12 @@ export default defineConfig({
     service: passthroughImageService(),
   },
   markdown: {
+    // Dual-theme Shiki: emits CSS vars for both; dark applies under [data-theme="dark"].
+    shikiConfig: {
+      themes: { light: 'github-light', dark: 'github-dark' },
+      defaultColor: false,
+      wrap: false,
+    },
     rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
   },
 });
