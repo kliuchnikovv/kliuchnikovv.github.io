@@ -16,7 +16,8 @@ const posts = (await getCollection('posts'))
 const featured = (await getCollection('projects'))
   .filter((p) => p.data.featured)
   .sort((a, b) => a.data.order - b.data.order)
-  .slice(0, 6);
+  // One row on the home page; the rest live on /projects.
+  .slice(0, 3);
 ---
 
 <BaseLayout title={site.title} description={site.description} canonicalPath="/">
@@ -69,7 +70,7 @@ const featured = (await getCollection('projects'))
 </BaseLayout>
 
 <style>
-  .intro { padding-top: 64px; padding-bottom: 24px; }
+  .intro { padding-top: 32px; padding-bottom: 24px; }
   .intro h1 {
     margin: 0;
     font-size: clamp(2.4rem, 6vw, 3.6rem);
