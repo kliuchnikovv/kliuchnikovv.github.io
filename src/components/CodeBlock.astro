@@ -1,0 +1,99 @@
+---
+/**
+ * CodeBlock — wraps Shiki output with a filename strip + copy button.
+ * Usage: wrap a rendered <pre> (from Shiki / Astro's <Code>) in the slot.
+ * Shiki wiring itself is Phase 2.
+ */
+interface Props {
+  filename?: string;
+}
+const { filename } = Astro.props;
+---
+
+<div class="code-block">
+  {filename && (
+    <div class="header">
+      <span class="filename">{filename}</span>
+      <button class="copy" type="button" data-copy aria-label="Copy code">Copy</button>
+    </div>
+  )}
+  <div class="scroll">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .code-block {
+    margin: 28px 0;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--code-bg);
+  }
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 16px;
+    background: var(--code-header-bg);
+    border-bottom: 1px solid var(--border);
+    font-family: var(--font-mono);
+    font-size: 12.5px;
+    color: var(--muted-foreground);
+  }
+  .copy {
+    font-family: var(--font-sans);
+    font-size: 12px;
+    color: var(--muted-foreground);
+    background: transparent;
+    border: 1px solid var(--border);
+    padding: 4px 10px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .copy:hover {
+    color: var(--foreground);
+    border-color: var(--muted-foreground);
+  }
+  .copy.copied {
+    color: var(--gold);
+    border-color: var(--gold);
+  }
+
+  .scroll {
+    overflow-x: auto;
+  }
+  .scroll :global(pre) {
+    margin: 0;
+    padding: 18px 20px;
+    font-family: var(--font-mono);
+    font-size: 13.5px;
+    line-height: 1.65;
+  }
+
+  @media (max-width: 767px) {
+    .code-block {
+      margin-inline: -20px;
+      border-inline: none;
+      border-radius: 0;
+    }
+  }
+</style>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (!target.matches('[data-copy]')) return;
+    const block = target.closest('.code-block');
+    const code = block?.querySelector('pre')?.innerText ?? '';
+    navigator.clipboard.writeText(code).then(() => {
+      target.textContent = 'Copied';
+      target.classList.add('copied');
+      setTimeout(() => {
+        target.textContent = 'Copy';
+        target.classList.remove('copied');
+      }, 1800);
+    });
+  });
+</script>

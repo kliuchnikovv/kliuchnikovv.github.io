@@ -1,0 +1,55 @@
+---
+/**
+ * Callout — admonition block for post prose.
+ * Kinds: note (gold, default), warning (red), aside (neutral).
+ */
+interface Props {
+  kind?: 'note' | 'warning' | 'aside';
+  title?: string;
+}
+const { kind = 'note', title } = Astro.props;
+const defaults = { note: 'Note', warning: 'Warning', aside: 'Aside' };
+const label = title ?? defaults[kind];
+---
+
+<aside class:list={['callout', kind]}>
+  <div class="label">{label}</div>
+  <div class="body"><slot /></div>
+</aside>
+
+<style>
+  .callout {
+    margin: 28px 0;
+    padding: 16px 20px;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    border-left: 3px solid var(--gold);
+    background: var(--gold-soft);
+  }
+  .callout.warning {
+    border-left-color: var(--destructive);
+    background: oklch(0.96 0.04 25);
+  }
+  [data-theme="dark"] .callout.warning { background: oklch(0.25 0.06 25); }
+
+  .callout.aside {
+    border-left-color: var(--border);
+    background: var(--muted);
+  }
+
+  .label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: oklch(0.42 0.1 60);
+    margin-bottom: 6px;
+  }
+  [data-theme="dark"] .callout.note .label { color: var(--gold); }
+
+  .callout.warning .label { color: var(--destructive); }
+  .callout.aside .label { color: var(--muted-foreground); }
+
+  .body { font-size: 15px; line-height: 1.6; }
+  .body :global(> *:first-child) { margin-top: 0; }
+  .body :global(> *:last-child) { margin-bottom: 0; }
+</style>

@@ -1,0 +1,64 @@
+---
+interface Props {
+  /** Active section: posts, projects, about */
+  active?: 'posts' | 'projects' | 'about';
+}
+const { active } = Astro.props;
+---
+
+<header class="site-header">
+  <a href="/" class="brand" aria-label="Home">
+    <span class="brand-mark">kv</span><span class="brand-dot">.</span>
+  </a>
+  <nav aria-label="Primary navigation">
+    <a href="/posts/" class:list={[{ active: active === 'posts' }]}>Posts</a>
+    <a href="/projects/" class:list={[{ active: active === 'projects' }]}>Projects</a>
+    <a href="/about/" class:list={[{ active: active === 'about' }]}>About</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px 120px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .brand {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+  .brand:hover { text-decoration: none; }
+  .brand-mark { color: var(--gold); }
+  .brand-dot { color: var(--foreground); }
+
+  nav {
+    display: flex;
+    gap: 32px;
+    font-size: 15px;
+  }
+  nav a {
+    color: var(--muted-foreground);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  nav a:hover { color: var(--foreground); }
+  nav a.active {
+    color: var(--foreground);
+    font-weight: 500;
+    border-bottom-color: var(--gold);
+  }
+
+  @media (max-width: 767px) {
+    .site-header { padding: 16px 20px; }
+    nav { gap: 20px; font-size: 14px; }
+    nav a { padding: 10px 0; }
+  }
+</style>

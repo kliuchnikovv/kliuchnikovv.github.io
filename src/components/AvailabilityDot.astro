@@ -1,0 +1,43 @@
+---
+/**
+ * AvailabilityDot — availability status dot with a soft-gold halo.
+ * Defaults come from the site config; props can override.
+ */
+import { availability } from '../config';
+
+interface Props {
+  available?: boolean;
+  label?: string;
+}
+const {
+  available = availability.available,
+  label = availability.label,
+} = Astro.props;
+---
+
+<span class:list={['availability', { busy: !available }]}>
+  <span class="dot" aria-hidden="true"></span>
+  <span>{label}</span>
+</span>
+
+<style>
+  .availability {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: var(--muted-foreground);
+  }
+  .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--gold);
+    box-shadow: 0 0 0 3px var(--gold-soft);
+  }
+  .busy .dot {
+    background: var(--muted-foreground);
+    box-shadow: 0 0 0 3px var(--muted);
+  }
+</style>

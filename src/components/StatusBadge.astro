@@ -1,0 +1,33 @@
+---
+interface Props {
+  status: 'active' | 'paused' | 'archived';
+}
+const { status } = Astro.props;
+const labels = { active: 'active', paused: 'paused', archived: 'archived' };
+---
+
+<span class:list={['badge', status]}>{labels[status]}</span>
+
+<style>
+  .badge {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+  }
+  .active {
+    color: var(--status-active-fg);
+    background: var(--status-active-bg);
+  }
+  .paused {
+    color: var(--status-paused-fg);
+    background: var(--status-paused-bg);
+  }
+  .archived {
+    color: var(--status-archived-fg);
+    background: var(--status-archived-bg);
+  }
+</style>

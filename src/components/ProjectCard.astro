@@ -1,0 +1,94 @@
+---
+import StatusBadge from './StatusBadge.astro';
+
+interface Props {
+  title: string;
+  url: string;
+  tagline: string;
+  status: 'active' | 'paused' | 'archived';
+  tech: string[];
+  cover?: string;
+}
+const { title, url, tagline, status, tech, cover } = Astro.props;
+---
+
+<article class="project-card">
+  <a href={url} class="card-link">
+    {cover && <img class="cover" src={cover} alt="" loading="lazy" />}
+    <div class="head">
+      <h3 class="title">{title}</h3>
+      <StatusBadge status={status} />
+    </div>
+    <p class="tagline">{tagline}</p>
+    {tech.length > 0 && (
+      <ul class="tech">
+        {tech.map((t) => <li>{t}</li>)}
+      </ul>
+    )}
+  </a>
+</article>
+
+<style>
+  .project-card {
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--card);
+    overflow: hidden;
+    transition: border-color 0.12s;
+  }
+  .project-card:hover { border-color: var(--muted-foreground); }
+
+  .card-link {
+    display: block;
+    padding: 20px;
+    color: inherit;
+    text-decoration: none;
+  }
+  .card-link:hover { text-decoration: none; }
+
+  .cover {
+    width: calc(100% + 40px);
+    margin: -20px -20px 16px;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+  }
+
+  .head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 8px;
+  }
+  .title {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+  }
+
+  .tagline {
+    margin: 0 0 14px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--muted-foreground);
+  }
+
+  .tech {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tech li {
+    font-family: var(--font-mono);
+    font-size: 11.5px;
+    color: var(--muted-foreground);
+    padding: 2px 8px;
+    background: var(--muted);
+    border-radius: var(--radius-sm);
+  }
+</style>

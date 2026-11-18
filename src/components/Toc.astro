@@ -1,0 +1,187 @@
+---
+/**
+ * Toc — sticky sidebar from 1024px, collapsible drawer below.
+ * headings — { depth, slug, text } extracted from md/mdx.
+ */
+interface Heading { depth: number; slug: string; text: string; }
+interface Props { headings: Heading[]; }
+
+const { headings } = Astro.props;
+const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
+---
+
+<aside class="toc" aria-label="Contents">
+  <!-- Desktop: sticky column -->
+  <div class="desktop">
+    <div class="label">Contents</div>
+    <nav class="items">
+      {items.map((h) => (
+        <a
+          href={`#${h.slug}`}
+          data-toc-link
+          class:list={['item', { h3: h.depth === 3 }]}
+        >
+          <span class="marker" aria-hidden="true"></span>
+          {h.text}
+        </a>
+      ))}
+    </nav>
+  </div>
+
+  <!-- Mobile: drawer -->
+  <details class="drawer">
+    <summary>
+      <span class="label">Contents</span>
+      <span class="count">· {items.length} sections</span>
+      <span class="chev" aria-hidden="true">⌄</span>
+    </summary>
+    <nav class="items">
+      {items.map((h) => (
+        <a href={`#${h.slug}`} data-toc-link class:list={['item', { h3: h.depth === 3 }]}>
+          {h.text}
+        </a>
+      ))}
+    </nav>
+  </details>
+</aside>
+
+<style>
+  .toc { width: 200px; flex-shrink: 0; }
+  .desktop { position: sticky; top: 24px; }
+
+  .label {
+    font-size: 12px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--muted-foreground);
+    margin-bottom: 14px;
+  }
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-left: 1px solid var(--border);
+    padding-left: 14px;
+  }
+  .item {
+    position: relative;
+    font-size: 13.5px;
+    line-height: 1.4;
+    color: var(--muted-foreground);
+    text-decoration: none;
+    transition: color 0.12s;
+  }
+  .item.h3 { padding-left: 12px; }
+  .item:hover { color: var(--foreground); }
+  .item.active {
+    color: var(--foreground);
+    font-weight: 500;
+  }
+  .item .marker {
+    position: absolute;
+    left: -15px;
+    top: 4px;
+    width: 2px;
+    height: 14px;
+    background: var(--gold);
+    opacity: 0;
+    transition: opacity 0.12s;
+  }
+  .item.active .marker { opacity: 1; }
+
+  .drawer { display: none; }
+
+  @media (max-width: 1023px) {
+    .toc { width: 100%; }
+    .desktop { display: none; }
+
+    .drawer { display: block; margin: 0 0 24px; }
+
+    .drawer summary {
+      list-style: none;
+      cursor: pointer;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 14px;
+    }
+    .drawer summary::-webkit-details-marker { display: none; }
+    .drawer[open] summary {
+      border-color: var(--gold);
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .drawer[open] summary .label { color: oklch(0.42 0.1 60); }
+    [data-theme="dark"] .drawer[open] summary .label { color: var(--gold); }
+
+    .drawer .label { margin: 0; }
+    .count { color: var(--muted-foreground); }
+    .chev {
+      margin-left: auto;
+      color: var(--muted-foreground);
+      font-size: 18px;
+      line-height: 1;
+      transition: transform 0.15s;
+    }
+    .drawer[open] .chev { transform: rotate(180deg); color: var(--gold); }
+
+    .drawer .items {
+      border: 1px solid var(--gold);
+      border-top: none;
+      border-radius: 0 0 var(--radius) var(--radius);
+      padding: 6px 16px 14px;
+      background: var(--card);
+      gap: 0;
+    }
+    .drawer .item {
+      padding: 10px 14px;
+      font-size: 14px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+    }
+    .drawer .item.active {
+      background: var(--gold-soft);
+      border-left: 2px solid var(--gold);
+      margin: 0 -8px;
+      padding-left: 16px;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    }
+  }
+</style>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('[data-toc-link]');
+  const headings = Array.from(links)
+    .map((a) => {
+      const id = a.getAttribute('href')!.slice(1);
+      return { link: a, el: document.getElementById(id) };
+    })
+    .filter((x) => x.el);
+
+  if (headings.length) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((e) => {
+          if (!e.isIntersecting) return;
+          links.forEach((l) => l.classList.remove('active'));
+          links.forEach((l) => {
+            if (l.getAttribute('href') === `#${(e.target as HTMLElement).id}`) {
+              l.classList.add('active');
+            }
+          });
+        });
+      },
+      { rootMargin: '-10% 0px -70% 0px' }
+    );
+
+    headings.forEach((h) => h.el && observer.observe(h.el));
+  }
+</script>
