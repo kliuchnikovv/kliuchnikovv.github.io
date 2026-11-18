@@ -82,6 +82,16 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
   color: var(--foreground);
 }
 
+/* rehype-autolink wraps headings in an anchor — keep the heading colour,
+   not the link accent. */
+.prose :is(h1, h2, h3, h4) a {
+  color: inherit;
+  text-decoration: none;
+}
+.prose :is(h1, h2, h3, h4) a:hover {
+  text-decoration: none;
+}
+
 /* Lead-абзац: первый <p> после <h1> поста */
 .prose > h1 + p {
   font-size: 20px;

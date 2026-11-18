@@ -115,11 +115,10 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
     }
     .drawer summary::-webkit-details-marker { display: none; }
     .drawer[open] summary {
-      border-color: var(--gold);
+      border-color: var(--border);
       border-radius: var(--radius) var(--radius) 0 0;
     }
-    .drawer[open] summary .label { color: oklch(0.42 0.1 60); }
-    [data-theme="dark"] .drawer[open] summary .label { color: var(--gold); }
+    .drawer[open] summary .label { color: var(--foreground); }
 
     .drawer .label { margin: 0; }
     .count { color: var(--muted-foreground); }
@@ -133,7 +132,7 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
     .drawer[open] .chev { transform: rotate(180deg); color: var(--gold); }
 
     .drawer .items {
-      border: 1px solid var(--gold);
+      border: 1px solid var(--border);
       border-top: none;
       border-radius: 0 0 var(--radius) var(--radius);
       padding: 6px 16px 14px;
@@ -146,13 +145,14 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
       min-height: 44px;
       display: flex;
       align-items: center;
+      border-left: 2px solid transparent;
     }
     .drawer .item.active {
-      background: var(--gold-soft);
-      border-left: 2px solid var(--gold);
-      margin: 0 -8px;
-      padding-left: 16px;
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      color: var(--foreground);
+      font-weight: 500;
+      border-left-color: var(--gold);
+      background: oklch(from var(--gold) l c h / 0.1);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
     }
   }
 </style>
