@@ -6,6 +6,7 @@ status: active
 pubDate: 2026-07-01
 repo: https://github.com/kliuchnikovv/nomi
 tech: [Go, Python, React Native, WebSocket]
+cover: /covers/nomi.svg
 tags: [go, ai]
 featured: true
 order: 2

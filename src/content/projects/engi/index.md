@@ -6,6 +6,7 @@ status: active
 pubDate: 2026-05-01
 repo: https://github.com/kliuchnikovv/engi
 tech: [Go, HTTP, OpenTelemetry]
+cover: /covers/engi.svg
 tags: [go]
 featured: true
 order: 4

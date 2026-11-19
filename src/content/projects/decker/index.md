@@ -6,6 +6,7 @@ status: active
 pubDate: 2026-06-01
 repo: https://github.com/kliuchnikovv/decker
 tech: [C++, ESP32-S3, PlatformIO, LibSSH]
+cover: /covers/decker.svg
 tags: [esp32, embedded]
 featured: false
 order: 8

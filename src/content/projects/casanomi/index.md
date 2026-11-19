@@ -6,6 +6,7 @@ status: active
 pubDate: 2026-10-01
 repo: https://github.com/kliuchnikovv/casanomi
 tech: [Go, TypeScript, PostgreSQL, OpenRouter]
+cover: /covers/casanomi.svg
 tags: [go, ai]
 featured: false
 order: 5

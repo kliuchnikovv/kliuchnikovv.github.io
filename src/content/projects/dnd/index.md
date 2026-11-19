@@ -6,6 +6,7 @@ status: active
 pubDate: 2026-03-01
 repo: https://github.com/kliuchnikovv/dnd
 tech: [Go, React Native, LLM, WebSocket]
+cover: /covers/dnd.svg
 tags: [go]
 featured: true
 order: 3

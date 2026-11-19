@@ -6,6 +6,7 @@ status: active
 pubDate: 2026-09-01
 repo: https://github.com/kliuchnikovv/keystone
 tech: [C++, ESP-IDF, Go, Matter, Zigbee]
+cover: /covers/keystone.svg
 tags: [esp32, go]
 featured: true
 order: 1

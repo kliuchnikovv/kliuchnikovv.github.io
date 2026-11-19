@@ -1,0 +1,66 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="casanomi — a natural-language prompt compiled into a trigger-condition-action automation for Home Assistant">
+  <defs>
+    <radialGradient id="ca-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F3DFB0" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#F3DFB0" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .ink{stroke:#26251F;} .mut{stroke:#C9BFA6;} .gold{stroke:#C98A1F;}
+      .fdot{fill:#C98A1F;} .idot{fill:#26251F;}
+      .lbl{fill:#8A8161;font-family:'Geist Mono','SFMono-Regular',ui-monospace,monospace;font-size:19px;letter-spacing:0.04em;}
+      .glbl{fill:#6B4E12;}
+      .mono{fill:#C98A1F;font-family:'Geist','Inter',system-ui,sans-serif;font-size:34px;font-weight:600;letter-spacing:-0.02em;}
+      .dot{fill:#272727;}
+    </style>
+  </defs>
+  <rect width="1200" height="675" fill="#FCF8F0"/>
+  <rect x="820" y="-220" width="600" height="600" fill="url(#ca-halo)"/>
+  <text x="64" y="90" class="mono">kv<tspan class="dot">.</tspan></text>
+
+  <!-- NL prompt bubble -->
+  <g>
+    <path d="M150 158 H490 a18 18 0 0 1 18 18 V232 a18 18 0 0 1 -18 18 H250 l-34 30 v-30 H150 a18 18 0 0 1 -18 -18 V176 a18 18 0 0 1 18 -18 z" fill="#F7ECD2" stroke="#C98A1F" stroke-width="2.5" stroke-linejoin="round"/>
+    <text x="320" y="212" text-anchor="middle" class="glbl" font-family="'Geist Mono',ui-monospace,monospace" font-size="21">"dim the lights at sunset"</text>
+    <text x="320" y="308" text-anchor="middle" class="lbl">natural language</text>
+  </g>
+
+  <!-- prompt -> automation (compiled) -->
+  <g fill="none" stroke="#C98A1F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M300 310 V430 H394"/>
+    <path d="M386 423 l9 7 -9 7"/>
+  </g>
+  <circle cx="300" cy="310" r="5" class="fdot"/>
+
+  <!-- automation flow: trigger -> condition -> action -->
+  <g fill="none" stroke="#26251F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M466 437 H584 M576 430 l9 7 -9 7"/>
+    <path d="M656 437 H774 M766 430 l9 7 -9 7"/>
+  </g>
+  <g>
+    <circle cx="432" cy="437" r="34" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <g fill="none" stroke="#26251F" stroke-width="2" stroke-linecap="round"><path d="M432 420 v17 l12 8"/></g>
+    <text x="432" y="500" text-anchor="middle" class="lbl">trigger</text>
+
+    <polygon points="620,403 654,437 620,471 586,437" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5" stroke-linejoin="round"/>
+    <text x="620" y="500" text-anchor="middle" class="lbl">if</text>
+
+    <rect x="776" y="403" width="68" height="68" rx="12" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <polyline points="798,437 824,437 816,428 M824 437 l-8 9" fill="none" stroke="#26251F" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="810" y="500" text-anchor="middle" class="lbl">action</text>
+  </g>
+
+  <!-- action -> Home Assistant -->
+  <g fill="none" stroke="#26251F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M844 437 H912 V356"/>
+    <path d="M905 364 l7 -9 7 9"/>
+  </g>
+
+  <!-- Home Assistant house -->
+  <g>
+    <polyline points="888,252 962,186 1036,252" fill="none" stroke="#C98A1F" stroke-width="2.5" stroke-linejoin="round"/>
+    <rect x="900" y="252" width="124" height="104" rx="6" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <rect x="928" y="292" width="68" height="30" rx="15" fill="none" stroke="#C98A1F" stroke-width="2.5"/>
+    <circle cx="982" cy="307" r="10" class="fdot"/>
+    <text x="962" y="394" text-anchor="middle" class="lbl">Home Assistant</text>
+  </g>
+</svg>
