@@ -46,8 +46,15 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
 </aside>
 
 <style>
-  .toc { width: 200px; flex-shrink: 0; }
-  .desktop { position: sticky; top: 24px; }
+  .toc {
+    width: 200px;
+    flex-shrink: 0;
+    align-self: flex-start;
+    position: sticky;
+    top: 24px;
+    max-height: calc(100vh - 48px);
+    overflow-y: auto;
+  }
 
   .label {
     font-size: 12px;
@@ -94,7 +101,7 @@ const items = headings.filter((h) => h.depth === 2 || h.depth === 3);
   .drawer { display: none; }
 
   @media (max-width: 1023px) {
-    .toc { width: 100%; }
+    .toc { width: 100%; top: 12px; }
     .desktop { display: none; }
 
     .drawer { display: block; margin: 0 0 24px; }
