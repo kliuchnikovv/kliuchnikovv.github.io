@@ -1,0 +1,70 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="dnd — a deterministic Go rules engine (a d20) feeding a Master, an Actor and a Guard that narrate">
+  <defs>
+    <radialGradient id="dd-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F3DFB0" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#F3DFB0" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .ink{stroke:#26251F;} .mut{stroke:#C9BFA6;} .gold{stroke:#C98A1F;}
+      .fdot{fill:#C98A1F;} .idot{fill:#26251F;}
+      .lbl{fill:#8A8161;font-family:'Geist Mono','SFMono-Regular',ui-monospace,monospace;font-size:19px;letter-spacing:0.04em;}
+      .glbl{fill:#6B4E12;}
+      .mono{fill:#C98A1F;font-family:'Geist','Inter',system-ui,sans-serif;font-size:34px;font-weight:600;letter-spacing:-0.02em;}
+      .dot{fill:#272727;}
+    </style>
+  </defs>
+  <rect width="1200" height="675" fill="#FCF8F0"/>
+  <rect x="820" y="-220" width="600" height="600" fill="url(#dd-halo)"/>
+  <text x="64" y="90" class="mono">kv<tspan class="dot">.</tspan></text>
+
+  <!-- traces: d20 -> roles -->
+  <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path class="ink" d="M516 290 H640 V160 H772"/>
+    <path class="ink" d="M520 330 H928"/>
+    <path class="ink" d="M516 370 H690 V520 H778"/>
+  </g>
+  <g>
+    <circle cx="516" cy="290" r="5" class="fdot"/>
+    <circle cx="520" cy="330" r="5" class="fdot"/>
+    <circle cx="516" cy="370" r="5" class="fdot"/>
+  </g>
+
+  <!-- d20 (Go rules engine) -->
+  <g>
+    <polygon points="430,230 343.4,280 343.4,380 430,430 516.6,380 516.6,280" fill="#F7ECD2" stroke="#C98A1F" stroke-width="3" stroke-linejoin="round"/>
+    <polygon points="430,262 368,372 492,372" fill="none" stroke="#C98A1F" stroke-width="2" stroke-linejoin="round"/>
+    <g fill="none" stroke="#C98A1F" stroke-width="2" stroke-linecap="round">
+      <line x1="430" y1="262" x2="430" y2="230"/>
+      <line x1="368" y1="372" x2="343.4" y2="380"/>
+      <line x1="492" y1="372" x2="516.6" y2="380"/>
+    </g>
+    <text x="430" y="348" text-anchor="middle" class="glbl" font-family="'Geist','Inter',system-ui,sans-serif" font-size="26" font-weight="600">20</text>
+    <text x="430" y="470" text-anchor="middle" class="lbl">Go rules engine</text>
+    <text x="430" y="498" text-anchor="middle" class="lbl" font-size="16" fill="#B2A98C">(seed → input)</text>
+  </g>
+
+  <!-- Master: scene frame -->
+  <g>
+    <rect x="772" y="118" width="96" height="84" rx="8" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <circle cx="848" cy="140" r="7" fill="none" stroke="#26251F" stroke-width="2"/>
+    <polyline points="782,192 808,158 826,180 844,164 858,192" fill="none" stroke="#26251F" stroke-width="2" stroke-linejoin="round"/>
+    <text x="820" y="226" text-anchor="middle" class="lbl">Master</text>
+  </g>
+
+  <!-- Actor: speech bubble -->
+  <g>
+    <path d="M930 294 H1050 a10 10 0 0 1 10 10 V356 a10 10 0 0 1 -10 10 H978 l-20 22 v-22 H930 a10 10 0 0 1 -10 -10 V304 a10 10 0 0 1 10 -10 z" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5" stroke-linejoin="round"/>
+    <g stroke="#26251F" stroke-width="2" stroke-linecap="round">
+      <line x1="942" y1="318" x2="1038" y2="318"/>
+      <line x1="942" y1="340" x2="1010" y2="340"/>
+    </g>
+    <text x="990" y="414" text-anchor="middle" class="lbl">Actor</text>
+  </g>
+
+  <!-- Guard: shield (audits) -->
+  <g>
+    <path d="M820 476 l40 16 v26 c0 30 -22 46 -40 56 c-18 -10 -40 -26 -40 -56 v-26 z" fill="#FCF8F0" stroke="#C98A1F" stroke-width="2.5" stroke-linejoin="round"/>
+    <polyline points="804,528 816,540 838,514" fill="none" stroke="#C98A1F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="820" y="592" text-anchor="middle" class="lbl">Guard</text>
+  </g>
+</svg>

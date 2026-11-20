@@ -1,0 +1,172 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AvailabilityDot from '../components/AvailabilityDot.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import { author } from '../config';
+import avatarImg from '../assets/avatar.jpg';
+
+// Single source of truth: the projects collection. Newest first, order as tiebreak.
+const projects = (await getCollection('projects')).sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout
+  title={`About — Valerii Kliuchnikov`}
+  description="Senior backend engineer, Go. Distributed systems, event-driven backends and LLM infrastructure. Barcelona, remote-first."
+  canonicalPath="/about/"
+  active="about"
+>
+  <article class="about page">
+    <header class="hero">
+      <div class="hero-main">
+        <div class="hero-text">
+          <p class="eyebrow">Backend engineering · Go</p>
+          <h1>Valerii Kliuchnikov</h1>
+          <p class="role">Senior Software Engineer — distributed systems &amp; LLM infrastructure</p>
+        </div>
+        {author.avatar && (
+          <Image class="portrait" src={avatarImg} alt={author.name} width={132} height={132} densities={[1, 2]} />
+        )}
+      </div>
+      <p class="lede">
+        I build production backend systems in Go — nine years across fintech, AI tooling and social
+        platforms. I care about systems that stay up under load: event-driven architectures, message
+        pipelines with real failure handling, and keeping LLM infrastructure fast and affordable.
+      </p>
+      <p class="dot-row"><AvailabilityDot /></p>
+    </header>
+
+    <section>
+      <h2>What I'm doing</h2>
+      <p>
+        Senior Software Engineer at <a href="https://playneta.gg">Playneta</a>, working across a Go
+        microservices monorepo: LLM-powered chat translation, user-generated-content moderation, and a
+        shared Kafka dead-letter-queue layer that the rest of the services lean on for reliability.
+      </p>
+      <p class="muted">
+        Before that: enterprise RBAC and payment systems, MCP server integrations at
+        <a href="https://refact.ai">Refact.ai</a>, Hyperledger Fabric smart contracts, and GDPR / PCI DSS
+        tokenization services.
+      </p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <div class="xp">
+        <div class="top"><span class="org">Playneta — Senior Software Engineer</span><span class="when">Current</span></div>
+        <p>Backend services in a Go microservices monorepo: real-time LLM chat translation, UGC moderation, and a shared Kafka / Redpanda DLQ layer for graceful degradation across services.</p>
+      </div>
+      <div class="xp">
+        <div class="top"><span class="org">Refact.ai — Backend / Integrations</span><span class="when">Prior</span></div>
+        <p>MCP server integrations connecting developer tooling to language-model backends.</p>
+      </div>
+      <div class="xp">
+        <div class="top"><span class="org">Fintech &amp; enterprise platforms</span><span class="when">Prior</span></div>
+        <p>Enterprise RBAC and payment systems, Hyperledger Fabric smart contracts, and GDPR / PCI DSS tokenization services — high-trust, regulated, high-throughput work.</p>
+      </div>
+    </section>
+
+    <section>
+      <div class="sec-head">
+        <h2>Projects</h2>
+        <a href="/projects/">All projects →</a>
+      </div>
+      <div class="project-grid">
+        {projects.map((p) => (
+          <ProjectCard
+            title={p.data.title}
+            url={`/projects/${p.id}/`}
+            tagline={p.data.tagline}
+            status={p.data.status}
+            tech={p.data.tech}
+            cover={p.data.cover ?? `/covers/${p.id}.png`}
+          />
+        ))}
+      </div>
+    </section>
+
+    <section>
+      <h2>Tech</h2>
+      <dl class="tech">
+        <div><dt>Languages</dt><dd>Go (primary), Python, TypeScript, C++</dd></div>
+        <div><dt>Messaging &amp; data</dt><dd>Kafka / Redpanda, PostgreSQL, ScyllaDB / Cassandra, Redis, gRPC</dd></div>
+        <div><dt>Infra &amp; cloud</dt><dd>Kubernetes / Helm, GCP, Terraform, Docker</dd></div>
+        <div><dt>AI &amp; observability</dt><dd>OpenRouter / MCP, OAuth 2.0, Prometheus, Grafana, OpenTelemetry</dd></div>
+      </dl>
+    </section>
+
+    <section>
+      <h2>Let's talk</h2>
+      <p class="muted">The fastest way to reach me is email.</p>
+      <p><a href="mailto:kliuchnikovv@icloud.com">kliuchnikovv@icloud.com</a></p>
+      <p class="colo">Barcelona · remote-first.</p>
+    </section>
+  </article>
+</BaseLayout>
+
+<style>
+  .hero { padding-bottom: 8px; }
+  .hero-main {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 28px;
+  }
+  .hero-text { min-width: 0; }
+  .portrait {
+    width: 96px;
+    height: 96px;
+    border-radius: var(--radius-lg);
+    object-fit: cover;
+    flex-shrink: 0;
+    border: 1px solid var(--border);
+  }
+  .hero h1 { margin: 0; font-size: clamp(2.4rem, 6vw, 3.4rem); font-weight: 600; letter-spacing: -0.02em; }
+  .hero .role { margin: 10px 0 0; font-size: clamp(1.05rem, 3vw, 1.3rem); color: var(--muted-foreground); }
+  .lede { max-width: 60ch; margin: 20px 0 0; font-size: 1.05rem; }
+  .dot-row { margin: 22px 0 0; }
+
+  .about section {
+    padding: 32px 0;
+    border-top: 1px solid var(--border);
+  }
+  .about h2 { font-size: 22px; font-weight: 600; margin: 0 0 16px; }
+  .about p { margin: 0 0 12px; max-width: 70ch; }
+  .muted { color: var(--muted-foreground); }
+
+  .xp { padding: 14px 0; border-top: 1px solid var(--border); }
+  .xp:first-of-type { border-top: 0; padding-top: 0; }
+  .xp .top { display: flex; justify-content: space-between; gap: 8px 16px; flex-wrap: wrap; align-items: baseline; }
+  .xp .org { font-weight: 600; }
+  .xp .when { color: var(--muted-foreground); font-size: 14px; }
+
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+  .sec-head h2 { margin: 0; }
+  .sec-head a { font-size: 14px; }
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+
+  .tech { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px 28px; margin: 0; }
+  .tech dt { font-size: 13px; color: var(--muted-foreground); margin-bottom: 4px; }
+  .tech dd { margin: 0; }
+  .colo { color: var(--muted-foreground); font-size: 14px; }
+
+  @media (max-width: 640px) {
+    .hero-main {
+      flex-direction: row;
+      align-items: center;
+      gap: 16px;
+    }
+    .portrait { width: 72px; height: 72px; }
+  }
+</style>

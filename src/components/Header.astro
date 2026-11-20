@@ -1,0 +1,123 @@
+---
+interface Props {
+  /** Active section: posts, projects, about */
+  active?: 'posts' | 'projects' | 'about';
+}
+const { active } = Astro.props;
+---
+
+<header class="site-header">
+  <div class="bar">
+    <a href="/" class="brand" aria-label="Home">
+      <span class="brand-mark">kv</span><span class="brand-dot">.</span>
+    </a>
+    <nav aria-label="Primary navigation">
+      <a href="/posts/" class:list={[{ active: active === 'posts' }]}>Posts</a>
+      <a href="/projects/" class:list={[{ active: active === 'projects' }]}>Projects</a>
+      <a href="/about/" class:list={[{ active: active === 'about' }]}>About</a>
+      <button class="theme-toggle" type="button" data-theme-toggle aria-label="Toggle theme" aria-pressed="false">
+        <svg class="moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+        <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+      </button>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header {
+    border-bottom: 1px solid var(--border);
+  }
+  .bar {
+    max-width: var(--content-page);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 28px var(--page-gutter);
+  }
+
+  .brand {
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--foreground);
+    text-decoration: none;
+  }
+  .brand:hover { text-decoration: none; }
+  .brand-mark { color: var(--gold); }
+  .brand-dot { color: var(--foreground); }
+
+  nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    font-size: 15px;
+  }
+  nav a {
+    color: var(--muted-foreground);
+    text-decoration: none;
+    padding-bottom: 4px;
+    border-bottom: 2px solid transparent;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  nav a:hover { color: var(--foreground); }
+  nav a.active {
+    color: var(--foreground);
+    font-weight: 500;
+    border-bottom-color: var(--gold);
+  }
+
+  .theme-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    margin-left: 4px;
+    padding: 0;
+    color: var(--muted-foreground);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-full);
+    cursor: pointer;
+    /* Lift to the nav text line: the links carry 6px of bottom padding+border. */
+    transform: translateY(-3px);
+    transition: color 0.12s;
+  }
+  .theme-toggle:hover {
+    color: var(--foreground);
+  }
+  /* Show the icon for the theme you'd switch TO. */
+  .theme-toggle .sun { display: none; }
+  :global(html[data-theme='dark']) .theme-toggle .sun { display: block; }
+  :global(html[data-theme='dark']) .theme-toggle .moon { display: none; }
+
+  @media (max-width: 767px) {
+    .bar { padding: 16px 20px; }
+    nav { gap: 20px; font-size: 14px; }
+    nav a { padding: 10px 0; }
+  }
+</style>
+
+<script>
+  const KEY = 'theme';
+  const btn = document.querySelector('[data-theme-toggle]');
+  const isDark = () => document.documentElement.dataset.theme === 'dark';
+  const sync = () => btn?.setAttribute('aria-pressed', String(isDark()));
+  sync();
+  btn?.addEventListener('click', () => {
+    const next = isDark() ? 'light' : 'dark';
+    document.documentElement.dataset.theme = next;
+    try {
+      localStorage.setItem(KEY, next);
+    } catch (e) {
+      /* storage blocked — theme still switches for this view */
+    }
+    sync();
+  });
+</script>

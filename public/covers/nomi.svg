@@ -1,0 +1,72 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="nomi — a React Native app and a Go API linked to a constellation of AI agents over REST and WebSocket">
+  <defs>
+    <radialGradient id="ns-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F3DFB0" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#F3DFB0" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .ink{stroke:#26251F;} .mut{stroke:#C9BFA6;} .gold{stroke:#C98A1F;}
+      .fdot{fill:#C98A1F;} .idot{fill:#26251F;}
+      .lbl{fill:#8A8161;font-family:'Geist Mono','SFMono-Regular',ui-monospace,monospace;font-size:19px;letter-spacing:0.04em;}
+      .glbl{fill:#6B4E12;}
+      .mono{fill:#C98A1F;font-family:'Geist','Inter',system-ui,sans-serif;font-size:34px;font-weight:600;letter-spacing:-0.02em;}
+      .dot{fill:#272727;}
+    </style>
+  </defs>
+  <rect width="1200" height="675" fill="#FCF8F0"/>
+  <rect x="820" y="-220" width="600" height="600" fill="url(#ns-halo)"/>
+  <text x="64" y="90" class="mono">kv<tspan class="dot">.</tspan></text>
+
+  <!-- traces: API -> agents -->
+  <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path class="ink" d="M555 300 V170 H722"/>
+    <path class="ink" d="M555 338 H947"/>
+    <path class="ink" d="M540 413 V515 H762"/>
+  </g>
+  <!-- agent interconnect -->
+  <g fill="none" stroke-width="1.6" class="mut">
+    <line x1="760" y1="208" x2="800" y2="477"/>
+    <line x1="794" y1="200" x2="978" y2="290"/>
+    <line x1="978" y1="352" x2="834" y2="500"/>
+  </g>
+  <g>
+    <circle cx="555" cy="300" r="5" class="fdot"/>
+    <circle cx="555" cy="338" r="5" class="fdot"/>
+    <circle cx="540" cy="413" r="5" class="fdot"/>
+  </g>
+
+  <!-- phone (React Native) -->
+  <g>
+    <rect x="120" y="255" width="92" height="162" rx="15" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <rect x="132" y="274" width="68" height="116" rx="6" fill="none" stroke="#C9BFA6" stroke-width="2"/>
+    <line x1="152" y1="266" x2="180" y2="266" stroke="#26251F" stroke-width="2.5" stroke-linecap="round"/>
+    <circle cx="166" cy="404" r="3.5" class="idot"/>
+    <text x="166" y="448" text-anchor="middle" class="lbl">app</text>
+  </g>
+
+  <!-- phone <-> API link: REST solid + WS dashed -->
+  <g fill="none" stroke-linecap="round">
+    <path class="ink" stroke-width="2.5" d="M212 315 H385"/>
+    <path class="gold" stroke-width="2.5" stroke-dasharray="5 7" d="M212 362 H385"/>
+    <path class="gold" stroke-width="2.5" d="M286 362 q7 -11 14 0 t14 0"/>
+  </g>
+
+  <!-- Go API chip -->
+  <g>
+    <rect x="385" y="263" width="170" height="150" rx="18" fill="#F7ECD2" stroke="#C98A1F" stroke-width="3"/>
+    <text x="470" y="333" text-anchor="middle" class="glbl" font-family="'Geist Mono',ui-monospace,monospace" font-size="24" font-weight="600">Go API</text>
+    <text x="470" y="366" text-anchor="middle" class="lbl" font-size="16">REST · WS</text>
+    <text x="470" y="455" text-anchor="middle" class="lbl">backend</text>
+  </g>
+
+  <!-- agents -->
+  <g>
+    <circle cx="760" cy="170" r="38" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <circle cx="760" cy="170" r="6" class="idot"/>
+    <circle cx="985" cy="320" r="38" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <circle cx="985" cy="320" r="6" class="idot"/>
+    <circle cx="800" cy="515" r="38" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <circle cx="800" cy="515" r="6" class="idot"/>
+    <text x="985" y="392" text-anchor="middle" class="lbl">agents + plugins</text>
+  </g>
+</svg>

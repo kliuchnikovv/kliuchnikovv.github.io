@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import AvailabilityDot from '../components/AvailabilityDot.astro';
+import PostCard from '../components/PostCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+import { isPublished } from '../utils/content';
+import { readingMinutes } from '../utils/reading-time';
+import { site } from '../config';
+
+const posts = (await getCollection('posts'))
+  .filter(isPublished)
+  .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
+  .slice(0, 5);
+
+const featured = (await getCollection('projects'))
+  .filter((p) => p.data.featured)
+  .sort((a, b) => a.data.order - b.data.order)
+  // One row on the home page; the rest live on /projects.
+  .slice(0, 3);
+---
+
+<BaseLayout title={site.title} description={site.description} canonicalPath="/">
+  <section class="intro page">
+    <p class="eyebrow">Backend engineering · Go</p>
+    <h1>{site.title}</h1>
+    <p class="role">Senior Software Engineer — distributed systems &amp; LLM infrastructure</p>
+    <p class="intro-dot"><AvailabilityDot /></p>
+  </section>
+
+  <section class="home-section page">
+    <div class="sec-head"><h2>Latest posts</h2><a href="/posts/">All posts →</a></div>
+    {posts.length > 0 ? (
+      <div class="post-list">
+        {posts.map((post) => (
+          <PostCard
+            title={post.data.title}
+            url={`/posts/${post.id}/`}
+            date={post.data.pubDate}
+            readingMinutes={readingMinutes(post.body ?? '')}
+            tags={post.data.tags}
+            description={post.data.description}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No posts yet — the first one is on its way.</p>
+    )}
+  </section>
+
+  <section class="home-section page">
+    <div class="sec-head"><h2>Featured projects</h2><a href="/projects/">All projects →</a></div>
+    {featured.length > 0 ? (
+      <div class="project-grid">
+        {featured.map((p) => (
+          <ProjectCard
+            title={p.data.title}
+            url={`/projects/${p.id}/`}
+            tagline={p.data.tagline}
+            status={p.data.status}
+            tech={p.data.tech}
+            cover={p.data.cover ?? `/covers/${p.id}.png`}
+          />
+        ))}
+      </div>
+    ) : (
+      <p class="empty-state">No featured projects yet.</p>
+    )}
+  </section>
+</BaseLayout>
+
+<style>
+  .intro { padding-top: 32px; padding-bottom: 24px; }
+  .intro h1 {
+    margin: 0;
+    font-size: clamp(2.4rem, 6vw, 3.6rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .intro .role {
+    margin: 10px 0 0;
+    font-size: clamp(1.05rem, 3vw, 1.35rem);
+    color: var(--muted-foreground);
+  }
+  .intro-dot { margin: 22px 0 0; }
+
+  .home-section { padding-top: 24px; padding-bottom: 24px; }
+  .sec-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 8px;
+  }
+  .sec-head h2 { font-size: 20px; font-weight: 600; margin: 0; }
+  .sec-head a { font-size: 14px; }
+
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    margin-top: 16px;
+  }
+</style>

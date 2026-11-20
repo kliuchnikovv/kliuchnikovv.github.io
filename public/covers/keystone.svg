@@ -1,0 +1,107 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="keystone — a central brain chip linked to Zigbee, Thread and Matter radios with a Go relay">
+  <defs>
+    <radialGradient id="ks-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F3DFB0" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#F3DFB0" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .ink   { stroke:#26251F; }
+      .mut   { stroke:#C9BFA6; }
+      .gold  { stroke:#C98A1F; }
+      .fdot  { fill:#C98A1F; }
+      .idot  { fill:#26251F; }
+      .lbl   { fill:#8A8161; font-family:'Geist Mono','SFMono-Regular',ui-monospace,monospace; font-size:19px; letter-spacing:0.04em; }
+      .mono  { fill:#C98A1F; font-family:'Geist','Inter',system-ui,sans-serif; font-size:34px; font-weight:600; letter-spacing:-0.02em; }
+      .dot   { fill:#272727; }
+    </style>
+  </defs>
+
+  <!-- paper -->
+  <rect width="1200" height="675" fill="#FCF8F0"/>
+  <!-- soft gold halo, top-right -->
+  <rect x="820" y="-220" width="600" height="600" fill="url(#ks-halo)"/>
+
+  <!-- brand monogram -->
+  <text x="64" y="90" class="mono">kv<tspan class="dot">.</tspan></text>
+
+  <!-- ===== traces (drawn under nodes) ===== -->
+  <g fill="none" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <!-- chip top -> Zigbee -->
+    <path class="ink" d="M490 253 V175 H674"/>
+    <!-- chip right -> Thread -->
+    <path class="ink" d="M515 320 H954"/>
+    <!-- chip bottom -> Matter -->
+    <path class="mut" d="M500 423 V520 H834"/>
+    <!-- chip bottom -> Go relay -->
+    <path class="mut" d="M430 423 V550"/>
+  </g>
+  <!-- solder joints -->
+  <g>
+    <circle cx="490" cy="175" r="4.5" class="idot"/>
+    <circle cx="500" cy="520" r="4.5" class="fdot"/>
+    <circle cx="490" cy="253" r="5" class="fdot"/>
+    <circle cx="515" cy="320" r="5" class="fdot"/>
+    <circle cx="500" cy="423" r="5" class="fdot"/>
+    <circle cx="430" cy="423" r="5" class="fdot"/>
+  </g>
+
+  <!-- ===== central brain chip ===== -->
+  <g>
+    <!-- pins -->
+    <g stroke="#26251F" stroke-width="2.5" stroke-linecap="round">
+      <line x1="385" y1="247" x2="385" y2="229"/><line x1="430" y1="247" x2="430" y2="229"/><line x1="475" y1="247" x2="475" y2="229"/>
+      <line x1="385" y1="429" x2="385" y2="447"/><line x1="430" y1="429" x2="430" y2="447"/><line x1="475" y1="429" x2="475" y2="447"/>
+      <line x1="339" y1="293" x2="321" y2="293"/><line x1="339" y1="338" x2="321" y2="338"/><line x1="339" y1="383" x2="321" y2="383"/>
+      <line x1="521" y1="293" x2="539" y2="293"/><line x1="521" y1="383" x2="539" y2="383"/>
+    </g>
+    <rect x="345" y="253" width="170" height="170" rx="18" fill="#F7ECD2" stroke="#C98A1F" stroke-width="3"/>
+    <!-- die grid -->
+    <g fill="none" stroke="#C98A1F" stroke-width="2" opacity="0.8">
+      <rect x="373" y="281" width="48" height="48" rx="7"/>
+      <rect x="439" y="281" width="48" height="48" rx="7"/>
+      <rect x="373" y="347" width="48" height="48" rx="7"/>
+      <rect x="439" y="347" width="48" height="48" rx="7"/>
+    </g>
+    <circle cx="430" cy="338" r="7" class="fdot"/>
+    <text x="430" y="466" text-anchor="middle" class="lbl" fill="#6B4E12">brain core</text>
+  </g>
+
+  <!-- ===== Zigbee (hex radio) ===== -->
+  <g>
+    <polygon points="766,150 743,110 697,110 674,150 697,190 743,190" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5" stroke-linejoin="round"/>
+    <g fill="none" stroke="#26251F" stroke-width="2" stroke-linecap="round">
+      <path d="M708 162 q12 -24 24 0"/>
+      <path d="M700 168 q20 -36 40 0"/>
+    </g>
+    <circle cx="720" cy="150" r="3.5" class="idot"/>
+    <text x="720" y="218" text-anchor="middle" class="lbl">Zigbee</text>
+  </g>
+
+  <!-- ===== Thread (hex radio) ===== -->
+  <g>
+    <polygon points="1046,320 1023,280 977,280 954,320 977,360 1023,360" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5" stroke-linejoin="round"/>
+    <g fill="none" stroke="#26251F" stroke-width="2" stroke-linecap="round">
+      <path d="M1000 300 v40 M980 320 h40"/>
+    </g>
+    <circle cx="1000" cy="320" r="3.5" class="idot"/>
+    <text x="1000" y="388" text-anchor="middle" class="lbl">Thread</text>
+  </g>
+
+  <!-- ===== Matter (square radio) ===== -->
+  <g>
+    <rect x="834" y="474" width="92" height="92" rx="14" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <g fill="none" stroke="#26251F" stroke-width="2" stroke-linejoin="round">
+      <polygon points="880,496 902,520 880,544 858,520"/>
+    </g>
+    <text x="880" y="602" text-anchor="middle" class="lbl">Matter</text>
+  </g>
+
+  <!-- ===== Go relay ===== -->
+  <g>
+    <rect x="345" y="550" width="170" height="68" rx="12" fill="#FCF8F0" stroke="#C98A1F" stroke-width="2.5"/>
+    <g fill="none" stroke="#C98A1F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M383 598 v-28 M383 570 l-10 10 M383 570 l10 10"/>
+    </g>
+    <text x="410" y="592" class="lbl" fill="#6B4E12">Go relay</text>
+  </g>
+</svg>

@@ -1,0 +1,53 @@
+---
+import { socialLinks, availability } from '../config';
+const year = new Date().getFullYear();
+---
+
+<footer class="site-footer">
+  <div class="bar">
+    <div class="left">
+      <div class="copyright">© {year} Valerii Kliuchnikov</div>
+      {availability.available && <div class="status">{availability.label}</div>}
+    </div>
+    <div class="links">
+      {socialLinks.map((link) => (
+        <a href={link.href} rel={link.href.startsWith('mailto:') ? undefined : 'me'}>{link.label}</a>
+      ))}
+      <a href="/rss.xml">RSS</a>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .site-footer {
+    margin-top: 48px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--muted-foreground);
+  }
+  .bar {
+    max-width: var(--content-page);
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 32px var(--page-gutter);
+  }
+
+  .left { display: flex; flex-direction: column; gap: 4px; }
+  .status { color: var(--muted-foreground); }
+
+  .links { display: flex; gap: 20px; flex-wrap: wrap; }
+  .links a { color: var(--muted-foreground); }
+  .links a:hover { color: var(--foreground); text-decoration: none; }
+
+  @media (max-width: 767px) {
+    .bar {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 24px 20px;
+    }
+    .links { gap: 16px; }
+  }
+</style>

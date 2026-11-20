@@ -1,0 +1,82 @@
+<svg width="1200" height="675" viewBox="0 0 1200 675" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="engi — an HTTP request flowing through a trie router into a declarative handler and back, with OpenTelemetry tracing">
+  <defs>
+    <radialGradient id="en-halo" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F3DFB0" stop-opacity="0.55"/>
+      <stop offset="70%" stop-color="#F3DFB0" stop-opacity="0"/>
+    </radialGradient>
+    <style>
+      .ink{stroke:#26251F;} .mut{stroke:#C9BFA6;} .gold{stroke:#C98A1F;}
+      .fdot{fill:#C98A1F;} .idot{fill:#26251F;}
+      .lbl{fill:#8A8161;font-family:'Geist Mono','SFMono-Regular',ui-monospace,monospace;font-size:19px;letter-spacing:0.04em;}
+      .glbl{fill:#6B4E12;}
+      .mono{fill:#C98A1F;font-family:'Geist','Inter',system-ui,sans-serif;font-size:34px;font-weight:600;letter-spacing:-0.02em;}
+      .dot{fill:#272727;}
+      .code{fill:#26251F;font-family:'Geist Mono',ui-monospace,monospace;font-size:19px;}
+    </style>
+  </defs>
+  <rect width="1200" height="675" fill="#FCF8F0"/>
+  <rect x="820" y="-220" width="600" height="600" fill="url(#en-halo)"/>
+  <text x="64" y="90" class="mono">kv<tspan class="dot">.</tspan></text>
+
+  <!-- flow arrows -->
+  <g fill="none" stroke="#C98A1F" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M276 330 H348 M340 323 l9 7 -9 7"/>
+    <path d="M516 330 H592 M584 323 l9 7 -9 7"/>
+    <path d="M806 330 H872 M864 323 l9 7 -9 7"/>
+  </g>
+
+  <!-- request -->
+  <g>
+    <rect x="124" y="294" width="152" height="72" rx="10" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <text x="200" y="337" text-anchor="middle" class="code">GET /users</text>
+    <text x="200" y="398" text-anchor="middle" class="lbl">request</text>
+  </g>
+
+  <!-- trie router -->
+  <g>
+    <rect x="354" y="278" width="156" height="104" rx="16" fill="#F7ECD2" stroke="#C98A1F" stroke-width="3"/>
+    <g fill="none" stroke="#C98A1F" stroke-width="2" stroke-linecap="round">
+      <line x1="432" y1="300" x2="400" y2="326"/>
+      <line x1="432" y1="300" x2="432" y2="326"/>
+      <line x1="432" y1="300" x2="464" y2="326"/>
+      <line x1="400" y1="340" x2="388" y2="360"/>
+      <line x1="400" y1="340" x2="412" y2="360"/>
+    </g>
+    <g fill="#C98A1F">
+      <circle cx="432" cy="298" r="4"/>
+      <circle cx="400" cy="328" r="3.5"/><circle cx="432" cy="328" r="3.5"/><circle cx="464" cy="328" r="3.5"/>
+      <circle cx="388" cy="362" r="3"/><circle cx="412" cy="362" r="3"/>
+    </g>
+    <text x="432" y="412" text-anchor="middle" class="glbl" font-family="'Geist Mono',ui-monospace,monospace" font-size="18">trie router</text>
+  </g>
+
+  <!-- handler -->
+  <g>
+    <rect x="598" y="266" width="208" height="128" rx="16" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <g>
+      <rect x="622" y="288" width="160" height="20" rx="6" fill="none" stroke="#C9BFA6" stroke-width="1.8"/>
+      <rect x="622" y="320" width="160" height="20" rx="6" fill="none" stroke="#C9BFA6" stroke-width="1.8"/>
+      <rect x="622" y="352" width="160" height="20" rx="6" fill="none" stroke="#C9BFA6" stroke-width="1.8"/>
+      <circle cx="634" cy="298" r="3.5" class="fdot"/>
+      <circle cx="634" cy="330" r="3.5" class="fdot"/>
+      <circle cx="634" cy="362" r="3.5" class="fdot"/>
+    </g>
+    <text x="702" y="422" text-anchor="middle" class="lbl">handler · declared params</text>
+  </g>
+
+  <!-- response -->
+  <g>
+    <rect x="878" y="294" width="152" height="72" rx="10" fill="#FCF8F0" stroke="#26251F" stroke-width="2.5"/>
+    <text x="954" y="337" text-anchor="middle" class="code">200 OK</text>
+    <text x="954" y="398" text-anchor="middle" class="lbl">response</text>
+  </g>
+
+  <!-- OpenTelemetry span -->
+  <g>
+    <line x1="140" y1="470" x2="1014" y2="470" stroke="#C9BFA6" stroke-width="2" stroke-dasharray="3 7" stroke-linecap="round"/>
+    <g fill="#C9BFA6">
+      <circle cx="200" cy="470" r="4"/><circle cx="432" cy="470" r="4"/><circle cx="702" cy="470" r="4"/><circle cx="954" cy="470" r="4"/>
+    </g>
+    <text x="577" y="500" text-anchor="middle" class="lbl">OpenTelemetry trace</text>
+  </g>
+</svg>

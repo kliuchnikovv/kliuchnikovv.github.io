@@ -1,0 +1,53 @@
+---
+interface Props {
+  tags: string[];
+  /** When set, this tag is marked as the active filter. */
+  activeTag?: string;
+}
+const { tags, activeTag } = Astro.props;
+---
+
+<ul class="tag-list">
+  {tags.map((tag) => (
+    <li>
+      <a
+        href={`/posts/?tag=${tag}`}
+        class:list={['tag', { 'is-active': tag === activeTag }]}
+        aria-current={tag === activeTag ? 'page' : undefined}
+      >#{tag}</a>
+    </li>
+  ))}
+</ul>
+
+<style>
+  .tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 13px;
+    color: var(--muted-foreground);
+    padding: 4px 10px;
+    min-height: 32px;
+    line-height: 24px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-full);
+    text-decoration: none;
+    transition: color 0.12s, border-color 0.12s;
+  }
+  .tag:hover {
+    color: var(--foreground);
+    border-color: var(--muted-foreground);
+    text-decoration: none;
+  }
+  .tag.is-active {
+    color: var(--gold);
+    border-color: var(--gold);
+    font-weight: 500;
+  }
+</style>
