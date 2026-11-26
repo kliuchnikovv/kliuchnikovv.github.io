@@ -1,5 +1,5 @@
 ---
-import { site } from '../config';
+import { site, analytics } from '../config';
 
 interface Props {
   title: string;
@@ -20,6 +20,9 @@ const {
 const canonical = new URL(canonicalPath, site.url).href;
 const ogImageUrl = new URL(ogImage ?? site.defaultOgImage, site.url).href;
 const rssUrl = new URL('/rss.xml', site.url).href;
+
+// Only load analytics in production builds, so local dev doesn't inflate stats.
+const showAnalytics = import.meta.env.PROD && analytics.goatCounterCode;
 
 const structuredData =
   ogType === 'article'
@@ -45,3 +48,13 @@ const structuredData =
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 
 <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+{
+  showAnalytics && (
+    <script
+      data-goatcounter={`https://${analytics.goatCounterCode}.goatcounter.com/count`}
+      async
+      src="//gc.zgo.at/count.js"
+    />
+  )
+}

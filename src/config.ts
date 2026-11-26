@@ -8,6 +8,15 @@ export const site = {
   defaultOgImage: '/og/default.png',
 } as const;
 
+/**
+ * Privacy-friendly analytics (GoatCounter). Set `code` to your GoatCounter
+ * site code — the subdomain of <code>.goatcounter.com you registered. Empty
+ * disables the script entirely. Only loaded in production builds.
+ */
+export const analytics = {
+  goatCounterCode: 'kliuchnikovv',
+} as const;
+
 export const availability = {
   available: true,
   label: 'Open to offers · Barcelona',
